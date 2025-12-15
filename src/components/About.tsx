@@ -19,7 +19,7 @@ const industries = [
   },
   {
     icon: Hotel,
-    industry: "Hotels & Hospitality",
+    industry: "Hotels",
     painPoints: [
       "Front desk overwhelmed with repetitive guest questions",
       "Direct bookings lost to OTAs taking 15-20% commission",
