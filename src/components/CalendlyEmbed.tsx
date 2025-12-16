@@ -15,7 +15,7 @@ export const CalendlyEmbed = () => {
   }, []);
 
   return (
-    <section className="py-24 sm:py-32 bg-secondary/30">
+    <section id="discovery-call" className="py-24 sm:py-32 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">

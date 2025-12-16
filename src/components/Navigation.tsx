@@ -59,7 +59,7 @@ export const Navigation = () => {
                 {link.label}
               </button>
             ))}
-            <Button onClick={() => scrollToSection("#contact")}>Get Started</Button>
+            <Button onClick={() => scrollToSection("#discovery-call")}>Get Started</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -86,7 +86,7 @@ export const Navigation = () => {
             ))}
             <Button
               className="w-full mt-4 h-12 text-base"
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => scrollToSection("#discovery-call")}
             >
               Get Started
             </Button>
