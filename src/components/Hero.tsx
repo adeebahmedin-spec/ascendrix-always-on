@@ -48,7 +48,7 @@ export const Hero = () => {
             <Button 
               size="lg" 
               className="group w-full sm:w-auto shadow-lg hover:shadow-xl transition-all text-lg px-8 py-6"
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => scrollToSection("#discovery-call")}
             >
               Get Your Free AI Audit
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
