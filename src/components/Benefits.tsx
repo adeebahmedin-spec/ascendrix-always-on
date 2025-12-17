@@ -65,7 +65,7 @@ export const Benefits = () => {
             <Button 
               size="lg" 
               className="group shadow-lg hover:shadow-xl transition-all text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => scrollToSection("#discovery-call")}
             >
               Book Your Free AI Audit
               <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
