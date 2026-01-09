@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ROICalculator } from "@/components/ROICalculator";
 import { ArrowRight, Clock, Globe, TrendingUp, Users } from "lucide-react";
 
 export const Hero = () => {
@@ -53,9 +54,7 @@ export const Hero = () => {
               Get Your Free AI Audit
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <p className="text-sm text-muted-foreground">
-              No commitment • See exactly how many leads you're losing
-            </p>
+            <ROICalculator />
           </div>
         </div>
       </div>
