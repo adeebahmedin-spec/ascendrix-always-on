@@ -1,9 +1,9 @@
-import { Building2, Hotel, UtensilsCrossed, AlertCircle, CheckCircle } from "lucide-react";
+import { Building2, Home, Briefcase, AlertCircle, CheckCircle } from "lucide-react";
 
 const industries = [
   {
-    icon: Building2,
-    industry: "Real Estate",
+    icon: Home,
+    industry: "Residential Real Estate",
     painPoints: [
       "Leads go cold because agents can't respond fast enough",
       "After-hours inquiries get lost overnight",
@@ -18,35 +18,35 @@ const industries = [
     ]
   },
   {
-    icon: Hotel,
-    industry: "Hotels",
+    icon: Briefcase,
+    industry: "Commercial Real Estate",
     painPoints: [
-      "Front desk overwhelmed with repetitive guest questions",
-      "Direct bookings lost to OTAs taking 15-20% commission",
-      "Guest complaints about slow response times",
-      "Upsell opportunities missed during busy periods"
+      "Complex property inquiries require immediate expert responses",
+      "Long sales cycles mean leads slip through the cracks",
+      "Tenant and investor inquiries pile up unanswered",
+      "Brokers juggling too many prospects to follow up properly"
     ],
     solutions: [
-      "AI handles FAQs instantly including room service, amenities, and directions",
-      "Direct booking assistance increases revenue per room",
-      "Guests get instant answers, improving satisfaction scores",
-      "Automated upsells for spa, dining, and room upgrades"
+      "AI qualifies commercial leads based on budget and requirements",
+      "Automated follow-up sequences keep deals moving forward",
+      "Instant responses to tenant and investor inquiries 24/7",
+      "Smart scheduling for property tours and meetings"
     ]
   },
   {
-    icon: UtensilsCrossed,
-    industry: "Restaurants",
+    icon: Building2,
+    industry: "Brokerages & Agencies",
     painPoints: [
-      "3+ hours daily spent on phone answering reservation calls",
-      "No-shows costing thousands in lost revenue monthly",
-      "Missed calls during rush hours mean empty tables",
-      "Staff stretched thin between customers and phones"
+      "Agents overwhelmed with lead volume and admin tasks",
+      "Inconsistent follow-up hurts conversion rates",
+      "Training new agents on lead handling takes months",
+      "No visibility into which leads are being worked"
     ],
     solutions: [
-      "AI books reservations 24/7 without tying up staff",
-      "Automated reminders reduce no-shows by up to 60%",
-      "Every call answered, even during Friday night rush",
-      "Fill cancelled tables within minutes via waitlist automation"
+      "Every lead gets the same fast, professional response",
+      "Automated qualification frees agents to focus on closings",
+      "AI handles initial contact so new agents can learn from quality leads",
+      "Full tracking of every conversation and lead status"
     ]
   }
 ];
