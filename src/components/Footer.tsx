@@ -20,15 +20,14 @@ export const Footer = () => {
             <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
               <li><a href="#about" className="hover:text-primary transition-colors py-1 inline-block">About</a></li>
               <li><a href="#services" className="hover:text-primary transition-colors py-1 inline-block">Services</a></li>
-              <li><a href="#case-studies" className="hover:text-primary transition-colors py-1 inline-block">Case Studies</a></li>
               <li><a href="#faq" className="hover:text-primary transition-colors py-1 inline-block">FAQs</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors py-1 inline-block">Contact</a></li>
+              <li><a href="#discovery-call" className="hover:text-primary transition-colors py-1 inline-block">Contact</a></li>
             </ul>
           </div>
         </div>
         
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t text-center text-xs sm:text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Ascendrix Services Limited. All rights reserved.</p>
+          <p>&copy; 2025 Ascendrix Services Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
