@@ -117,7 +117,7 @@ export const ROICalculator = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="manualTasks">Hours/Week on Manual Tasks (per person)</Label>
+                <Label htmlFor="manualTasks">Hours per week (per person)</Label>
                 <Input
                   id="manualTasks"
                   type="number"
