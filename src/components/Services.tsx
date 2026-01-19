@@ -4,25 +4,25 @@ const services = [
   {
     icon: Phone,
     title: "AI Voice Agents",
-    description: "Human-like voice assistants that answer calls, qualify leads, handle reservations, and book appointments 24 hours a day, 7 days a week.",
+    description: "Human-like voice assistants that answer calls, qualify leads, and book property showings 24 hours a day, 7 days a week.",
     metric: "Never miss a call again"
   },
   {
     icon: MessageSquare,
     title: "AI Text Agents",
-    description: "Intelligent SMS and chat agents that follow up with leads instantly, answer guest questions, and convert inquiries into booked appointments.",
+    description: "Intelligent SMS and chat agents that follow up with leads instantly, answer property questions, and convert inquiries into booked appointments.",
     metric: "Respond in under 30 seconds"
   },
   {
     icon: Calendar,
     title: "Automated Booking",
-    description: "Seamless scheduling that syncs with your calendar. Leads and guests book directly, receive confirmations, and get reminders automatically.",
+    description: "Seamless scheduling that syncs with your calendar. Prospects book showings directly, receive confirmations, and get reminders automatically.",
     metric: "Reduce no-shows by 60%"
   },
   {
     icon: Workflow,
     title: "Lead Qualification",
-    description: "AI qualifies every prospect before they reach your team. Your staff only speaks with serious, ready-to-buy leads.",
+    description: "AI qualifies every prospect before they reach your team. Your agents only speak with serious, ready-to-buy leads.",
     metric: "Focus on deals that close"
   }
 ];
@@ -36,7 +36,7 @@ export const Services = () => {
             How We Turn Missed Opportunities Into Revenue
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Our AI agents work around the clock so you can focus on closing deals, delighting guests, and filling tables.
+            Our AI agents work around the clock so you can focus on closing deals and growing your real estate business.
           </p>
         </div>
         

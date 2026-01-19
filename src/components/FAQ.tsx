@@ -8,35 +8,35 @@ import {
 const faqs = [
   {
     question: "How quickly can I get started?",
-    answer: "Most businesses are up and running within 3-5 days. We handle the setup, training, and integration with your existing systems. No technical expertise required on your end."
+    answer: "Most real estate professionals are up and running within 3-5 days. We handle the setup, training, and integration with your existing systems. No technical expertise required on your end."
   },
   {
-    question: "Will the AI sound robotic or awkward to my customers?",
+    question: "Will the AI sound robotic or awkward to my leads?",
     answer: "Not at all. Our AI agents are trained to have natural, human-like conversations. Most callers don't realize they're speaking with AI. We customize the tone and responses to match your brand voice."
   },
   {
     question: "Can the AI handle complex questions or just basic inquiries?",
-    answer: "Our AI handles everything from simple FAQs to qualifying leads, scheduling appointments, answering property questions, explaining menu items, confirming reservations, and more. For anything it can't handle, it seamlessly transfers to your team."
+    answer: "Our AI handles everything from simple FAQs to qualifying leads, scheduling showings, answering property questions, discussing financing options, and more. For anything it can't handle, it seamlessly transfers to your team."
   },
   {
     question: "What happens if the AI can't answer a question?",
-    answer: "The AI gracefully hands off to a human team member, providing them with full context of the conversation. You never lose a lead or frustrate a customer."
+    answer: "The AI gracefully hands off to a human team member, providing them with full context of the conversation. You never lose a lead or frustrate a prospect."
   },
   {
     question: "How does this work for real estate agents?",
     answer: "Our AI responds to every lead inquiry instantly, day or night. It qualifies buyers by asking about budget, timeline, and preferences, then books showings directly on your calendar. You only meet pre-qualified prospects."
   },
   {
-    question: "How does this help hotels increase direct bookings?",
-    answer: "The AI answers guest questions 24/7, handles booking inquiries, and guides guests to book directly instead of through OTAs. This saves you 15-20% in commission fees per booking."
+    question: "Can this help with commercial real estate?",
+    answer: "Absolutely. The AI qualifies commercial leads based on budget, space requirements, and timeline. It handles tenant and investor inquiries 24/7, schedules property tours, and keeps your pipeline moving."
   },
   {
-    question: "Can restaurants use this for reservations?",
-    answer: "Absolutely. The AI manages all reservation calls, sends automated confirmations and reminders, handles modifications, and fills cancelled tables from your waitlist. This reduces no-shows by up to 60%."
+    question: "How does this benefit brokerages and agencies?",
+    answer: "Every lead gets the same fast, professional response regardless of which agent it's assigned to. AI handles initial qualification so your agents focus on closings, not cold calls. New agents can hit the ground running."
   },
   {
     question: "What languages does your AI support?",
-    answer: "Our AI agents speak 99+ languages fluently, making them perfect for businesses serving international guests or diverse local communities."
+    answer: "Our AI agents speak 99+ languages fluently, making them perfect for serving diverse local communities and international buyers."
   },
   {
     question: "Is there a long-term contract?",
@@ -44,7 +44,7 @@ const faqs = [
   },
   {
     question: "How much does it cost?",
-    answer: "Pricing depends on your call volume and specific needs. Book a free AI audit and we'll give you a custom quote along with a clear ROI projection based on your current lead flow."
+    answer: "Pricing depends on your lead volume and specific needs. Book a free demo and we'll give you a custom quote along with a clear ROI projection based on your current lead flow."
   }
 ];
 
