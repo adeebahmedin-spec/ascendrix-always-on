@@ -35,7 +35,7 @@ export const Benefits = () => {
             Get Started in 3 Simple Steps
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            No complex setup. No long contracts. Just results.
+            No complex setup. Just results.
           </p>
         </div>
         
