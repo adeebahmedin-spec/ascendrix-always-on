@@ -28,6 +28,7 @@ export const Footer = () => {
         
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t text-center text-xs sm:text-sm text-muted-foreground">
           <p>&copy; 2025 Ascendrix Services Limited. All rights reserved.</p>
+          <p className="mt-2">Zayaan Bukhari - Founder & CEO of Ascendrix Services Limited</p>
         </div>
       </div>
     </footer>
