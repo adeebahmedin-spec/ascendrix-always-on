@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     question: "How is this different from running ads?",
-    answer: "Ads require ongoing spend and often attract unqualified leads. Our approach uses direct, personalised outreach to specific decision-makers — so every conversation is with someone who fits your ideal client profile."
+    answer: "Ads require ongoing spend and often attract unqualified leads. Our approach uses direct, personalised outreach to specific decision-makers so every conversation is with someone who fits your ideal client profile."
   },
   {
     question: "How quickly will I start seeing meetings?",
