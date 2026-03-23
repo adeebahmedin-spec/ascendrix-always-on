@@ -8,7 +8,7 @@ import {
 const faqs = [
   {
     question: "Who is this service for?",
-    answer: "We work with B2B companies in real estate — brokerages, commercial real estate firms, property investment companies, and agents who want a consistent flow of qualified meetings with investors and buyers."
+    answer: "We work with Real estate companies such as brokerages/agents, developers, commercial real estate firms, and many other real estate professionals who want a consistent flow of qualified meetings."
   },
   {
     question: "How is this different from running ads?",
