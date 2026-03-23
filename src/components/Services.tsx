@@ -4,7 +4,7 @@ const services = [
   {
     icon: Linkedin,
     title: "LinkedIn Outreach",
-    description: "We identify and connect with your ideal prospects — investors, buyers, and decision-makers — through personalised LinkedIn messaging that builds trust and books calls.",
+    description: "We identify and connect with your ideal prospects, investors, buyers, and decision-makers, through personalised LinkedIn messaging that builds trust and books calls.",
     metric: "Direct access to decision-makers"
   },
   {
