@@ -1,29 +1,29 @@
-import { MessageSquare, Phone, Calendar, Workflow, ArrowRight } from "lucide-react";
+import { Linkedin, Mail, UserCheck, BarChart3, ArrowRight } from "lucide-react";
 
 const services = [
   {
-    icon: Phone,
-    title: "AI Voice Agents",
-    description: "Human-like voice assistants that answer calls, qualify leads, and book property showings 24 hours a day, 7 days a week.",
-    metric: "Never miss a call again"
+    icon: Linkedin,
+    title: "LinkedIn Outreach",
+    description: "We identify and connect with your ideal prospects — investors, buyers, and decision-makers — through personalised LinkedIn messaging that builds trust and books calls.",
+    metric: "Direct access to decision-makers"
   },
   {
-    icon: MessageSquare,
-    title: "AI Text Agents",
-    description: "Intelligent SMS and chat agents that follow up with leads instantly, answer property questions, and convert inquiries into booked appointments.",
-    metric: "Respond in under 30 seconds"
+    icon: Mail,
+    title: "Cold Email Campaigns",
+    description: "Targeted, personalised email sequences designed to cut through the noise. We handle list building, copywriting, deliverability, and follow-ups so your inbox fills with replies, not silence.",
+    metric: "Emails that actually get opened"
   },
   {
-    icon: Calendar,
-    title: "Automated Booking",
-    description: "Seamless scheduling that syncs with your calendar. Prospects book showings directly, receive confirmations, and get reminders automatically.",
-    metric: "Reduce no-shows by 60%"
-  },
-  {
-    icon: Workflow,
+    icon: UserCheck,
     title: "Lead Qualification",
-    description: "AI qualifies every prospect before they reach your team. Your agents only speak with serious, ready-to-buy leads.",
-    metric: "Focus on deals that close"
+    description: "Not every reply is a good fit. We qualify responses based on budget, intent, and timeline so you only get on calls with serious prospects who are ready to move.",
+    metric: "No more wasted meetings"
+  },
+  {
+    icon: BarChart3,
+    title: "Campaign Optimisation",
+    description: "We continuously test messaging, targeting, and timing. You get transparent reporting on open rates, reply rates, and meetings booked — so you always know what's working.",
+    metric: "Data-driven improvements"
   }
 ];
 
@@ -33,10 +33,10 @@ export const Services = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 sm:mb-16 animate-fade-in max-w-3xl mx-auto px-2">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-            How We Turn Missed Opportunities Into Revenue
+            How We Fill Your Calendar With Qualified Meetings
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Our AI agents work around the clock so you can focus on closing deals and growing your real estate business.
+            A proven outreach system built for real estate companies that want consistent, predictable deal flow.
           </p>
         </div>
         

@@ -2,14 +2,12 @@ import { useEffect } from "react";
 
 export const CalendlyEmbed = () => {
   useEffect(() => {
-    // Load Calendly script
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
       document.body.removeChild(script);
     };
   }, []);
@@ -22,8 +20,8 @@ export const CalendlyEmbed = () => {
             Schedule Your Discovery Call
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Let's discuss how AI automation can transform your business. 
-            Pick a time that works for you.
+            Let's see if we're a good fit. We'll walk through your current pipeline 
+            and show you exactly how we'd generate qualified meetings for your business.
           </p>
         </div>
         

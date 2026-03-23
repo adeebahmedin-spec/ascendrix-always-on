@@ -10,8 +10,8 @@ export const Footer = () => {
               <img src={logo} alt="Ascendrix Services Limited" className="h-12 sm:h-14 w-auto mx-auto sm:mx-0" />
             </a>
             <p className="text-muted-foreground text-sm sm:text-base max-w-sm mx-auto sm:mx-0">
-              Building AI systems that work around the clock to scale your business. 
-              Never miss an opportunity with our intelligent automation solutions.
+              Helping B2B companies book more qualified meetings through targeted 
+              LinkedIn outreach and cold email campaigns.
             </p>
           </div>
           

@@ -9,55 +9,47 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator, DollarSign, Clock, TrendingUp } from "lucide-react";
+import { Calculator, DollarSign, CalendarCheck, TrendingUp } from "lucide-react";
 
 interface ROIResults {
-  monthlySavings: number;
-  annualSavings: number;
-  hoursReclaimed: number;
+  monthlyRevenue: number;
+  annualRevenue: number;
+  meetingsPerMonth: number;
   roi: number;
 }
 
 export const ROICalculator = () => {
   const [open, setOpen] = useState(false);
-  const [teamSize, setTeamSize] = useState<string>("");
-  const [hourlyRate, setHourlyRate] = useState<string>("");
-  const [hoursOnManualTasks, setHoursOnManualTasks] = useState<string>("");
-  const [currentToolCosts, setCurrentToolCosts] = useState<string>("");
+  const [avgDealValue, setAvgDealValue] = useState<string>("");
+  const [closeRate, setCloseRate] = useState<string>("");
+  const [meetingsPerWeek, setMeetingsPerWeek] = useState<string>("2");
   const [results, setResults] = useState<ROIResults | null>(null);
 
   const calculateROI = () => {
-    const team = parseFloat(teamSize) || 0;
-    const rate = parseFloat(hourlyRate) || 0;
-    const manualHours = parseFloat(hoursOnManualTasks) || 0;
-    const toolCosts = parseFloat(currentToolCosts) || 0;
+    const dealValue = parseFloat(avgDealValue) || 0;
+    const rate = (parseFloat(closeRate) || 0) / 100;
+    const meetings = parseFloat(meetingsPerWeek) || 2;
 
-    // Assume AI automation saves 60% of manual task time
-    const automationEfficiency = 0.6;
-    const hoursReclaimed = team * manualHours * automationEfficiency * 4; // Monthly hours saved
-    const laborSavings = hoursReclaimed * rate;
-    const toolSavings = toolCosts * 0.3; // Assume 30% tool cost reduction
+    const meetingsPerMonth = meetings * 4;
+    const dealsPerMonth = meetingsPerMonth * rate;
+    const monthlyRevenue = dealsPerMonth * dealValue;
+    const annualRevenue = monthlyRevenue * 12;
 
-    const monthlySavings = laborSavings + toolSavings;
-    const annualSavings = monthlySavings * 12;
-
-    // Assume average implementation cost for ROI calculation
-    const estimatedImplementationCost = 5000;
-    const roi = ((annualSavings - estimatedImplementationCost) / estimatedImplementationCost) * 100;
+    const estimatedMonthlyCost = 2000;
+    const roi = ((monthlyRevenue - estimatedMonthlyCost) / estimatedMonthlyCost) * 100;
 
     setResults({
-      monthlySavings,
-      annualSavings,
-      hoursReclaimed,
+      monthlyRevenue,
+      annualRevenue,
+      meetingsPerMonth,
       roi: Math.max(0, roi),
     });
   };
 
   const resetCalculator = () => {
-    setTeamSize("");
-    setHourlyRate("");
-    setHoursOnManualTasks("");
-    setCurrentToolCosts("");
+    setAvgDealValue("");
+    setCloseRate("");
+    setMeetingsPerWeek("2");
     setResults(null);
   };
 
@@ -81,62 +73,51 @@ export const ROICalculator = () => {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Calculator className="h-5 w-5 text-primary" />
-            AI Implementation ROI Calculator
+            Lead Gen ROI Calculator
           </DialogTitle>
         </DialogHeader>
 
         {!results ? (
           <div className="space-y-4 py-4">
             <p className="text-sm text-muted-foreground">
-              Estimate how much you could save by implementing our AI solutions into your business.
+              See what consistent qualified meetings could mean for your revenue.
             </p>
 
             <div className="space-y-3">
               <div className="space-y-2">
-                <Label htmlFor="teamSize">Team Size</Label>
+                <Label htmlFor="dealValue">Average Deal Value ($)</Label>
                 <Input
-                  id="teamSize"
+                  id="dealValue"
                   type="number"
                   min="1"
-                  placeholder="e.g., 10"
-                  value={teamSize}
-                  onChange={(e) => setTeamSize(e.target.value)}
+                  placeholder="e.g., 25000"
+                  value={avgDealValue}
+                  onChange={(e) => setAvgDealValue(e.target.value)}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="hourlyRate">Average Hourly Rate ($)</Label>
+                <Label htmlFor="closeRate">Your Close Rate (%)</Label>
                 <Input
-                  id="hourlyRate"
+                  id="closeRate"
                   type="number"
                   min="1"
-                  placeholder="e.g., 50"
-                  value={hourlyRate}
-                  onChange={(e) => setHourlyRate(e.target.value)}
+                  max="100"
+                  placeholder="e.g., 20"
+                  value={closeRate}
+                  onChange={(e) => setCloseRate(e.target.value)}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="manualTasks">Hours per week (per person)</Label>
+                <Label htmlFor="meetings">Meetings Booked Per Week</Label>
                 <Input
-                  id="manualTasks"
+                  id="meetings"
                   type="number"
                   min="1"
-                  placeholder="e.g., 15"
-                  value={hoursOnManualTasks}
-                  onChange={(e) => setHoursOnManualTasks(e.target.value)}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="toolCosts">Current Monthly Tool Costs ($)</Label>
-                <Input
-                  id="toolCosts"
-                  type="number"
-                  min="0"
-                  placeholder="e.g., 500"
-                  value={currentToolCosts}
-                  onChange={(e) => setCurrentToolCosts(e.target.value)}
+                  placeholder="e.g., 2"
+                  value={meetingsPerWeek}
+                  onChange={(e) => setMeetingsPerWeek(e.target.value)}
                 />
               </div>
             </div>
@@ -144,9 +125,9 @@ export const ROICalculator = () => {
             <Button
               onClick={calculateROI}
               className="w-full"
-              disabled={!teamSize || !hourlyRate || !hoursOnManualTasks}
+              disabled={!avgDealValue || !closeRate}
             >
-              Calculate Savings
+              Calculate Potential Revenue
             </Button>
           </div>
         ) : (
@@ -155,25 +136,25 @@ export const ROICalculator = () => {
               <div className="rounded-lg bg-primary/10 p-4 text-center">
                 <DollarSign className="mx-auto h-6 w-6 text-primary" />
                 <p className="mt-2 text-2xl font-bold text-primary">
-                  {formatCurrency(results.monthlySavings)}
+                  {formatCurrency(results.monthlyRevenue)}
                 </p>
-                <p className="text-sm text-muted-foreground">Monthly Savings</p>
+                <p className="text-sm text-muted-foreground">Potential Monthly Revenue</p>
               </div>
 
               <div className="rounded-lg bg-primary/10 p-4 text-center">
                 <TrendingUp className="mx-auto h-6 w-6 text-primary" />
                 <p className="mt-2 text-2xl font-bold text-primary">
-                  {formatCurrency(results.annualSavings)}
+                  {formatCurrency(results.annualRevenue)}
                 </p>
-                <p className="text-sm text-muted-foreground">Annual Savings</p>
+                <p className="text-sm text-muted-foreground">Potential Annual Revenue</p>
               </div>
 
               <div className="rounded-lg bg-secondary p-4 text-center">
-                <Clock className="mx-auto h-6 w-6 text-secondary-foreground" />
+                <CalendarCheck className="mx-auto h-6 w-6 text-secondary-foreground" />
                 <p className="mt-2 text-2xl font-bold">
-                  {Math.round(results.hoursReclaimed)}
+                  {Math.round(results.meetingsPerMonth)}
                 </p>
-                <p className="text-sm text-muted-foreground">Hours Saved/Month</p>
+                <p className="text-sm text-muted-foreground">Meetings/Month</p>
               </div>
 
               <div className="rounded-lg bg-secondary p-4 text-center">
@@ -181,12 +162,12 @@ export const ROICalculator = () => {
                 <p className="mt-2 text-2xl font-bold">
                   {Math.round(results.roi)}%
                 </p>
-                <p className="text-sm text-muted-foreground">First Year ROI</p>
+                <p className="text-sm text-muted-foreground">Estimated ROI</p>
               </div>
             </div>
 
             <p className="text-center text-sm text-muted-foreground">
-              Ready to start saving? Book a free discovery call to discuss your specific needs.
+              These estimates are based on the numbers you provided. Actual results depend on your market, offer, and sales process.
             </p>
 
             <div className="flex gap-3">
@@ -200,7 +181,7 @@ export const ROICalculator = () => {
                   document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Book Discovery Call
+                Book a Free Demo
               </Button>
             </div>
           </div>

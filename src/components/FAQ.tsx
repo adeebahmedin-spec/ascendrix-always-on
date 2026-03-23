@@ -7,44 +7,36 @@ import {
 
 const faqs = [
   {
-    question: "How quickly can I get started?",
-    answer: "Most real estate professionals are up and running within 3-5 days. We handle the setup, training, and integration with your existing systems. No technical expertise required on your end."
+    question: "Who is this service for?",
+    answer: "We work with B2B companies in real estate — brokerages, commercial real estate firms, property investment companies, and agents who want a consistent flow of qualified meetings with investors and buyers."
   },
   {
-    question: "Will the AI sound robotic or awkward to my leads?",
-    answer: "Not at all. Our AI agents are trained to have natural, human-like conversations. Most callers don't realize they're speaking with AI. We customize the tone and responses to match your brand voice."
+    question: "How is this different from running ads?",
+    answer: "Ads require ongoing spend and often attract unqualified leads. Our approach uses direct, personalised outreach to specific decision-makers — so every conversation is with someone who fits your ideal client profile."
   },
   {
-    question: "Can the AI handle complex questions or just basic inquiries?",
-    answer: "Our AI handles everything from simple FAQs to qualifying leads, scheduling showings, answering property questions, discussing financing options, and more. For anything it can't handle, it seamlessly transfers to your team."
+    question: "How quickly will I start seeing meetings?",
+    answer: "Most clients start seeing their first qualified meetings within 2-3 weeks of campaign launch. Results build over time as we refine targeting and messaging based on real data."
   },
   {
-    question: "What happens if the AI can't answer a question?",
-    answer: "The AI gracefully hands off to a human team member, providing them with full context of the conversation. You never lose a lead or frustrate a prospect."
+    question: "Do I need to provide the prospect lists?",
+    answer: "No. We handle everything — from identifying your ideal prospects and building targeted lists to crafting the messaging and managing the outreach. You just show up to the meetings."
   },
   {
-    question: "How does this work for real estate agents?",
-    answer: "Our AI responds to every lead inquiry instantly, day or night. It qualifies buyers by asking about budget, timeline, and preferences, then books showings directly on your calendar. You only meet pre-qualified prospects."
+    question: "Will this make my company look spammy?",
+    answer: "Not at all. Every message is personalised and relevant to the recipient. We focus on starting genuine conversations, not blasting generic templates. Our approach is designed to build your reputation, not harm it."
   },
   {
-    question: "Can this help with commercial real estate?",
-    answer: "Absolutely. The AI qualifies commercial leads based on budget, space requirements, and timeline. It handles tenant and investor inquiries 24/7, schedules property tours, and keeps your pipeline moving."
-  },
-  {
-    question: "How does this benefit brokerages and agencies?",
-    answer: "Every lead gets the same fast, professional response regardless of which agent it's assigned to. AI handles initial qualification so your agents focus on closings, not cold calls. New agents can hit the ground running."
-  },
-  {
-    question: "What languages does your AI support?",
-    answer: "Our AI agents speak 99+ languages fluently, making them perfect for serving diverse local communities and international buyers."
+    question: "What if the leads aren't qualified?",
+    answer: "We qualify every response before it reaches you. We filter based on budget, intent, and timeline so you're only meeting with prospects who are genuinely interested and ready to have a serious conversation."
   },
   {
     question: "Is there a long-term contract?",
-    answer: "No long-term commitments. We offer flexible monthly plans because we're confident you'll see the value quickly. Most clients see positive ROI within the first 30 days."
+    answer: "We offer flexible monthly plans. We're confident you'll see the value, so we don't lock you into long commitments."
   },
   {
     question: "How much does it cost?",
-    answer: "Pricing depends on your lead volume and specific needs. Book a free demo and we'll give you a custom quote along with a clear ROI projection based on your current lead flow."
+    answer: "Pricing depends on your target market and campaign scope. Book a free strategy call and we'll give you a clear breakdown based on your goals."
   }
 ];
 
@@ -57,7 +49,7 @@ export const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Everything you need to know about our AI agents
+            Everything you need to know about our lead generation service
           </p>
         </div>
 
