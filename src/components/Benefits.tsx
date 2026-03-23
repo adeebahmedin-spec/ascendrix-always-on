@@ -1,21 +1,21 @@
-import { Search, Settings, Rocket, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const steps = [
   {
     step: "1",
-    title: "Free AI Audit",
-    description: "We analyze your current lead flow, response times, and identify exactly how much revenue you're losing to slow follow-up."
+    title: "Free Strategy Call",
+    description: "We learn about your business, ideal clients, and current pipeline to see if we're the right fit."
   },
   {
     step: "2",
-    title: "Custom AI Setup",
-    description: "We build and train AI voice and text agents tailored to your business, integrated with your calendar and CRM."
+    title: "Campaign Setup",
+    description: "We build your prospect lists, craft personalised messaging, and set up your LinkedIn and email infrastructure."
   },
   {
     step: "3",
-    title: "Go Live in Days",
-    description: "Your AI agents start handling leads 24/7. Most clients see measurable results within the first 30 days."
+    title: "Meetings Start Booking",
+    description: "Campaigns go live and qualified meetings start hitting your calendar. We optimise continuously based on results."
   }
 ];
 
@@ -53,7 +53,6 @@ export const Benefits = () => {
                 <h3 className="font-semibold text-base sm:text-lg mb-1.5 sm:mb-2">{step.title}</h3>
                 <p className="text-muted-foreground text-xs sm:text-sm px-2">{step.description}</p>
                 
-                {/* Mobile connector line */}
                 {index < steps.length - 1 && (
                   <div className="md:hidden w-0.5 h-6 bg-primary/20 mx-auto mt-4" />
                 )}
@@ -67,7 +66,7 @@ export const Benefits = () => {
               className="group shadow-lg hover:shadow-xl transition-all text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
               onClick={() => scrollToSection("#discovery-call")}
             >
-              Book Your Free AI Audit
+              Book Your Free Demo
               <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <p className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
