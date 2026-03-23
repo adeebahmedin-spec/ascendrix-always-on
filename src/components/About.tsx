@@ -23,7 +23,7 @@ const solutions = [
   "Targeted LinkedIn outreach that starts real conversations with decision-makers",
   "Personalised cold email campaigns that land in inboxes, not spam folders",
   "A steady pipeline of 2-3 qualified meetings per week",
-  "You focus on closing — we handle the prospecting",
+  "You focus on closing, we handle the prospecting",
 ];
 
 export const About = () => {
