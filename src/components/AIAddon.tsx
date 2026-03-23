@@ -23,7 +23,7 @@ export const AIAddon = () => {
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Already generating leads? Supercharge your pipeline with AI agents that respond to every inquiry instantly, 
-              qualify prospects, and book meetings for you — 24/7, in 99+ languages.
+              qualify prospects, and book meetings for you, 24/7, in 99+ languages.
             </p>
           </div>
 
