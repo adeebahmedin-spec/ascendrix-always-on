@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: "Do I need to provide the prospect lists?",
-    answer: "No. We handle everything — from identifying your ideal prospects and building targeted lists to crafting the messaging and managing the outreach. You just show up to the meetings."
+    answer: "No. We handle everything from identifying your ideal prospects and building targeted lists to crafting the messaging and managing the outreach. You just show up to the meetings."
   },
   {
     question: "Will this make my company look spammy?",

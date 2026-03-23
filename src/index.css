@@ -64,37 +64,37 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 0 0% 100%;
+    --background: 222 47% 5%;
+    --foreground: 210 40% 92%;
 
-    --card: 222 47% 15%;
-    --card-foreground: 0 0% 100%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 92%;
 
-    --popover: 222 47% 15%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 92%;
 
-    --primary: 217 91% 60%;
+    --primary: 210 100% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 18%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 222 40% 12%;
+    --secondary-foreground: 210 40% 92%;
 
-    --muted: 217 33% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 222 40% 12%;
+    --muted-foreground: 215 20% 55%;
 
-    --accent: 189 92% 55%;
+    --accent: 199 89% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
-    --ring: 217 91% 60%;
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 210 100% 56%;
     
     /* Dark mode custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(189 92% 55%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(222 47% 15%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%) 0%, hsl(199 89% 48%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 5%) 0%, hsl(222 47% 10%) 100%);
     --shadow-subtle: 0 1px 3px 0 rgb(0 0 0 / 0.3);
     --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.3);
     --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.4);

@@ -46,7 +46,7 @@ export const AIAddon = () => {
               <Zap className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
               <div>
                 <h4 className="font-semibold text-sm sm:text-base mb-1">Instant Response</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">Every lead gets a response in under 30 seconds — so you never lose a prospect to slow follow-up.</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Every lead gets a response in under 30 seconds so you never lose a prospect to slow follow-up.</p>
               </div>
             </div>
           </div>

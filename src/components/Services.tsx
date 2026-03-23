@@ -22,7 +22,7 @@ const services = [
   {
     icon: BarChart3,
     title: "Campaign Optimisation",
-    description: "We continuously test messaging, targeting, and timing. You get transparent reporting on open rates, reply rates, and meetings booked — so you always know what's working.",
+    description: "We continuously test messaging, targeting, and timing. You get transparent reporting on open rates, reply rates, and meetings booked so you always know what's working.",
     metric: "Data-driven improvements"
   }
 ];
