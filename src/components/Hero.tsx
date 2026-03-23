@@ -22,8 +22,8 @@ export const Hero = () => {
           </h1>
           
           <p className="mb-6 sm:mb-8 text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
-            We help real estate companies book 2-3 serious meetings with investors and buyers every week 
-            through targeted LinkedIn outreach and cold email campaigns — no ad spend required.
+            We help real estate companies book 2-3 serious meetings with investors or buyers weekly 
+            through targeted LinkedIn outreach or cold email campaigns - no ad spend required.
           </p>
 
           <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-6 lg:gap-8 mb-8 sm:mb-10 text-xs sm:text-sm">
