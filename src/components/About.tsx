@@ -20,7 +20,7 @@ const painPoints = [
 ];
 
 const solutions = [
-  "Targeted LinkedIn outreach that starts real conversations with decision-makers",
+  "Targeted LinkedIn outreach that starts real conversations",
   "Personalised cold email campaigns that land in inboxes, not spam folders",
   "A steady pipeline of qualified leads per week",
   "You focus on closing, we handle the prospecting",
