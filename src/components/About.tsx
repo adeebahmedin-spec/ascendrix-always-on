@@ -35,7 +35,7 @@ export const About = () => {
             Your Pipeline Shouldn't Depend on Luck
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Most real estate companies don't have a lead generation problem, they have a consistency problem. 
+            Most companies don't have a lead generation problem, they have a consistency problem. 
             If your calendar isn't filling up with qualified meetings, you're leaving money on the table.
           </p>
         </div>
