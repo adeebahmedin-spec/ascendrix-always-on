@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Services } from "@/components/Services";
 import { Benefits } from "@/components/Benefits";
+import { ROICalculator } from "@/components/ROICalculator";
 import { FAQ } from "@/components/FAQ";
 import { AIAddon } from "@/components/AIAddon";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
@@ -16,6 +17,7 @@ const Index = () => {
       <About />
       <Services />
       <Benefits />
+      <ROICalculator />
       <FAQ />
       <AIAddon />
       <CalendlyEmbed />

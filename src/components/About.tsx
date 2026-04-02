@@ -11,7 +11,7 @@ const painPoints = [
   },
   {
     icon: Search,
-    pain: "You struggle to consistently find serious investors and buyers",
+    pain: "You struggle to consistently find high quality leads",
   },
   {
     icon: MessageSquareX,
@@ -22,7 +22,7 @@ const painPoints = [
 const solutions = [
   "Targeted LinkedIn outreach that starts real conversations with decision-makers",
   "Personalised cold email campaigns that land in inboxes, not spam folders",
-  "A steady pipeline of 2-3 qualified meetings per week",
+  "A steady pipeline of qualified leads per week",
   "You focus on closing, we handle the prospecting",
 ];
 

@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "ROI Calculator", href: "#roi-calculator" },
   { label: "FAQs", href: "#faq" },
   { label: "Contact", href: "#discovery-call" },
 ];
@@ -44,7 +45,7 @@ export const Navigation = () => {
             className="flex items-center"
             aria-label="Go to home"
           >
-            <img src={logo} alt="Ascendrix Services Limited" className="h-10 sm:h-12 w-auto" />
+            <img src={logo} alt="Ascendrix Services Limited" className="h-10 sm:h-12 w-auto brightness-0 invert" />
           </button>
 
           {/* Desktop Navigation */}
