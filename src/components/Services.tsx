@@ -1,30 +1,36 @@
-import { Linkedin, Mail, UserCheck, BarChart3, ArrowRight } from "lucide-react";
+import { Settings, Users, PenTool, Send, TrendingUp } from "lucide-react";
 
-const services = [
+const steps = [
   {
-    icon: Linkedin,
-    title: "LinkedIn Outreach",
-    description: "We identify and connect with your ideal prospects, investors, buyers, and decision-makers, through personalised LinkedIn messaging that builds trust and books calls.",
-    metric: "Direct access to decision-makers"
+    icon: Settings,
+    step: "01",
+    title: "Setup & Warm-Up",
+    description: "We set up new domains, configure SPF, DKIM, and DMARC records, and create multiple outreach inboxes. Each is slowly warmed up to build sender reputation and ensure strong deliverability.",
   },
   {
-    icon: Mail,
-    title: "Cold Email Campaigns",
-    description: "Targeted, personalised email sequences designed to cut through the noise. We handle list building, copywriting, deliverability, and follow-ups so your inbox fills with replies, not silence.",
-    metric: "Emails that actually get opened"
+    icon: Users,
+    step: "02",
+    title: "ICP & Lead Sourcing",
+    description: "We define your Ideal Customer Profile - industries, roles, company size, and pain points - then build and verify targeted lead lists using tools like Clay or Apollo.",
   },
   {
-    icon: UserCheck,
-    title: "Lead Qualification",
-    description: "Not every reply is a good fit. We qualify responses based on budget, intent, and timeline so you only get on calls with serious prospects who are ready to move.",
-    metric: "No more wasted meetings"
+    icon: PenTool,
+    step: "03",
+    title: "Copywriting & Testing",
+    description: "We craft multiple subject lines and email variations, A/B test them, and refine based on open and reply rates to find what converts best.",
   },
   {
-    icon: BarChart3,
-    title: "Campaign Optimisation",
-    description: "We continuously test messaging, targeting, and timing. You get transparent reporting on open rates, reply rates, and meetings booked so you always know what's working.",
-    metric: "Data-driven improvements"
-  }
+    icon: Send,
+    step: "04",
+    title: "Outreach & Sequencing",
+    description: "We launch tailored campaigns using sequences with 3-5 follow-ups. Engagement is tracked for consistent optimisation.",
+  },
+  {
+    icon: TrendingUp,
+    step: "05",
+    title: "Performance & Scaling",
+    description: "We monitor key metrics, analyse results, and scale what works - ensuring your campaigns consistently generate qualified leads and booked calls.",
+  },
 ];
 
 export const Services = () => {
@@ -33,31 +39,30 @@ export const Services = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 sm:mb-16 animate-fade-in max-w-3xl mx-auto px-2">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-            How We Fill Your Calendar With Qualified Meetings
+            How We Fill Your Calendar With Consistent Leads
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            A proven outreach system built for real estate companies that want consistent, predictable deal flow.
+            A proven 5-step system that fills your calendar with consistent qualified leads.
           </p>
         </div>
         
-        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-          {services.map((service, index) => (
+        <div className="max-w-4xl mx-auto space-y-6">
+          {steps.map((step, index) => (
             <div 
-              key={service.title}
-              className="group relative animate-fade-in p-4 sm:p-0 rounded-lg bg-background/50 sm:bg-transparent"
+              key={step.title}
+              className="group animate-fade-in relative"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex gap-3 sm:gap-4">
-                <div className="flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <service.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+              <div className="flex gap-4 sm:gap-6 p-5 sm:p-6 rounded-xl bg-background/60 border border-border/50 hover:border-primary/30 transition-all">
+                <div className="flex-shrink-0 flex flex-col items-center gap-2">
+                  <span className="text-xs font-bold text-primary/60 tracking-widest">{step.step}</span>
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <step.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1.5 sm:mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm sm:text-base mb-2 sm:mb-3">{service.description}</p>
-                  <div className="flex items-center gap-2 text-primary text-xs sm:text-sm font-medium">
-                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    <span>{service.metric}</span>
-                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-1.5 sm:mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{step.description}</p>
                 </div>
               </div>
             </div>

@@ -1,15 +1,8 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator, DollarSign, CalendarCheck, TrendingUp } from "lucide-react";
+import { DollarSign, CalendarCheck, TrendingUp, RotateCcw } from "lucide-react";
 
 interface ROIResults {
   monthlyRevenue: number;
@@ -19,7 +12,6 @@ interface ROIResults {
 }
 
 export const ROICalculator = () => {
-  const [open, setOpen] = useState(false);
   const [avgDealValue, setAvgDealValue] = useState<string>("");
   const [closeRate, setCloseRate] = useState<string>("");
   const [meetingsPerWeek, setMeetingsPerWeek] = useState<string>("2");
@@ -62,131 +54,130 @@ export const ROICalculator = () => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="gap-2">
-          <Calculator className="h-4 w-4" />
-          Calculate Your ROI
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-xl">
-            <Calculator className="h-5 w-5 text-primary" />
-            Lead Gen ROI Calculator
-          </DialogTitle>
-        </DialogHeader>
+    <section id="roi-calculator" className="py-16 sm:py-24 lg:py-32">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-10 sm:mb-14 animate-fade-in max-w-3xl mx-auto px-2">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
+            See What Qualified Leads Could Mean for Your Revenue
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground">
+            Enter your numbers below to estimate the potential impact on your bottom line.
+          </p>
+        </div>
 
-        {!results ? (
-          <div className="space-y-4 py-4">
-            <p className="text-sm text-muted-foreground">
-              See what consistent qualified meetings could mean for your revenue.
-            </p>
+        <div className="max-w-3xl mx-auto">
+          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-10 animate-fade-in">
+            {!results ? (
+              <div className="space-y-6">
+                <div className="grid gap-5 sm:grid-cols-3">
+                  <div className="space-y-2">
+                    <Label htmlFor="dealValue" className="text-sm font-medium">Average Deal Value ($)</Label>
+                    <Input
+                      id="dealValue"
+                      type="number"
+                      min="1"
+                      placeholder="e.g., 25000"
+                      value={avgDealValue}
+                      onChange={(e) => setAvgDealValue(e.target.value)}
+                      className="h-12 text-base"
+                    />
+                  </div>
 
-            <div className="space-y-3">
-              <div className="space-y-2">
-                <Label htmlFor="dealValue">Average Deal Value ($)</Label>
-                <Input
-                  id="dealValue"
-                  type="number"
-                  min="1"
-                  placeholder="e.g., 25000"
-                  value={avgDealValue}
-                  onChange={(e) => setAvgDealValue(e.target.value)}
-                />
+                  <div className="space-y-2">
+                    <Label htmlFor="closeRate" className="text-sm font-medium">Your Close Rate (%)</Label>
+                    <Input
+                      id="closeRate"
+                      type="number"
+                      min="1"
+                      max="100"
+                      placeholder="e.g., 20"
+                      value={closeRate}
+                      onChange={(e) => setCloseRate(e.target.value)}
+                      className="h-12 text-base"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="meetings" className="text-sm font-medium">Meetings Per Week</Label>
+                    <Input
+                      id="meetings"
+                      type="number"
+                      min="1"
+                      placeholder="e.g., 2"
+                      value={meetingsPerWeek}
+                      onChange={(e) => setMeetingsPerWeek(e.target.value)}
+                      className="h-12 text-base"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  onClick={calculateROI}
+                  className="w-full h-12 text-base"
+                  disabled={!avgDealValue || !closeRate}
+                >
+                  Calculate Potential Revenue
+                </Button>
               </div>
+            ) : (
+              <div className="space-y-8">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  <div className="rounded-xl bg-primary/10 border border-primary/20 p-5 sm:p-6 text-center">
+                    <DollarSign className="mx-auto h-7 w-7 text-primary" />
+                    <p className="mt-3 text-2xl sm:text-3xl font-bold text-primary">
+                      {formatCurrency(results.monthlyRevenue)}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Potential Monthly Revenue</p>
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="closeRate">Your Close Rate (%)</Label>
-                <Input
-                  id="closeRate"
-                  type="number"
-                  min="1"
-                  max="100"
-                  placeholder="e.g., 20"
-                  value={closeRate}
-                  onChange={(e) => setCloseRate(e.target.value)}
-                />
+                  <div className="rounded-xl bg-primary/10 border border-primary/20 p-5 sm:p-6 text-center">
+                    <TrendingUp className="mx-auto h-7 w-7 text-primary" />
+                    <p className="mt-3 text-2xl sm:text-3xl font-bold text-primary">
+                      {formatCurrency(results.annualRevenue)}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Potential Annual Revenue</p>
+                  </div>
+
+                  <div className="rounded-xl bg-secondary border border-border/50 p-5 sm:p-6 text-center">
+                    <CalendarCheck className="mx-auto h-7 w-7 text-foreground" />
+                    <p className="mt-3 text-2xl sm:text-3xl font-bold">
+                      {Math.round(results.meetingsPerMonth)}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Meetings Per Month</p>
+                  </div>
+
+                  <div className="rounded-xl bg-secondary border border-border/50 p-5 sm:p-6 text-center">
+                    <TrendingUp className="mx-auto h-7 w-7 text-foreground" />
+                    <p className="mt-3 text-2xl sm:text-3xl font-bold">
+                      {Math.round(results.roi)}%
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Estimated ROI</p>
+                  </div>
+                </div>
+
+                <p className="text-center text-sm text-muted-foreground">
+                  These estimates are based on the numbers you provided. Actual results depend on your market, offer, and sales process.
+                </p>
+
+                <div className="flex gap-3">
+                  <Button variant="outline" onClick={resetCalculator} className="flex-1 h-12 gap-2">
+                    <RotateCcw className="h-4 w-4" />
+                    Recalculate
+                  </Button>
+                  <Button
+                    className="flex-1 h-12"
+                    onClick={() => {
+                      document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    Book a Free Demo
+                  </Button>
+                </div>
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="meetings">Meetings Booked Per Week</Label>
-                <Input
-                  id="meetings"
-                  type="number"
-                  min="1"
-                  placeholder="e.g., 2"
-                  value={meetingsPerWeek}
-                  onChange={(e) => setMeetingsPerWeek(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <Button
-              onClick={calculateROI}
-              className="w-full"
-              disabled={!avgDealValue || !closeRate}
-            >
-              Calculate Potential Revenue
-            </Button>
+            )}
           </div>
-        ) : (
-          <div className="space-y-6 py-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-primary/10 p-4 text-center">
-                <DollarSign className="mx-auto h-6 w-6 text-primary" />
-                <p className="mt-2 text-2xl font-bold text-primary">
-                  {formatCurrency(results.monthlyRevenue)}
-                </p>
-                <p className="text-sm text-muted-foreground">Potential Monthly Revenue</p>
-              </div>
-
-              <div className="rounded-lg bg-primary/10 p-4 text-center">
-                <TrendingUp className="mx-auto h-6 w-6 text-primary" />
-                <p className="mt-2 text-2xl font-bold text-primary">
-                  {formatCurrency(results.annualRevenue)}
-                </p>
-                <p className="text-sm text-muted-foreground">Potential Annual Revenue</p>
-              </div>
-
-              <div className="rounded-lg bg-secondary p-4 text-center">
-                <CalendarCheck className="mx-auto h-6 w-6 text-secondary-foreground" />
-                <p className="mt-2 text-2xl font-bold">
-                  {Math.round(results.meetingsPerMonth)}
-                </p>
-                <p className="text-sm text-muted-foreground">Meetings/Month</p>
-              </div>
-
-              <div className="rounded-lg bg-secondary p-4 text-center">
-                <TrendingUp className="mx-auto h-6 w-6 text-secondary-foreground" />
-                <p className="mt-2 text-2xl font-bold">
-                  {Math.round(results.roi)}%
-                </p>
-                <p className="text-sm text-muted-foreground">Estimated ROI</p>
-              </div>
-            </div>
-
-            <p className="text-center text-sm text-muted-foreground">
-              These estimates are based on the numbers you provided. Actual results depend on your market, offer, and sales process.
-            </p>
-
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={resetCalculator} className="flex-1">
-                Recalculate
-              </Button>
-              <Button
-                className="flex-1"
-                onClick={() => {
-                  setOpen(false);
-                  document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Book a Free Demo
-              </Button>
-            </div>
-          </div>
-        )}
-      </DialogContent>
-    </Dialog>
+        </div>
+      </div>
+    </section>
   );
 };

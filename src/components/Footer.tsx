@@ -7,11 +7,10 @@ export const Footer = () => {
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <div className="sm:col-span-2 text-center sm:text-left">
             <a href="#home" className="inline-block mb-3 sm:mb-4">
-              <img src={logo} alt="Ascendrix Services Limited" className="h-12 sm:h-14 w-auto mx-auto sm:mx-0" />
+              <img src={logo} alt="Ascendrix Services Limited" className="h-12 sm:h-14 w-auto mx-auto sm:mx-0 brightness-0 invert" />
             </a>
             <p className="text-muted-foreground text-sm sm:text-base max-w-sm mx-auto sm:mx-0">
-              Helping B2B companies book more qualified meetings through targeted 
-              LinkedIn outreach and cold email campaigns.
+              ASL is a UK-based Agency helping B2B companies book more qualified meetings through targeted LinkedIn outreach and cold email outreach campaigns.
             </p>
           </div>
           

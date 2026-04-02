@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { ROICalculator } from "@/components/ROICalculator";
 import { ArrowRight, Target, Mail, Linkedin, CalendarCheck } from "lucide-react";
 
 export const Hero = () => {
@@ -22,8 +21,7 @@ export const Hero = () => {
           </h1>
           
           <p className="mb-6 sm:mb-8 text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
-            We help real estate companies book 2-3 serious meetings with investors or buyers weekly 
-            through targeted LinkedIn outreach or cold email campaigns - no ad spend required.
+            At ASL we run targeted LinkedIn outreach + data-driven cold email campaigns that fill your calendar with qualified leads - while you focus on closing deals.
           </p>
 
           <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-6 lg:gap-8 mb-8 sm:mb-10 text-xs sm:text-sm">
@@ -37,7 +35,7 @@ export const Hero = () => {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground justify-center sm:justify-start">
               <CalendarCheck className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
-              <span>2-3 meetings/week</span>
+              <span>Consistent qualified leads</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground justify-center sm:justify-start">
               <Target className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
@@ -54,7 +52,14 @@ export const Hero = () => {
               Book a Free Demo
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <ROICalculator />
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto text-lg px-8 py-6"
+              onClick={() => scrollToSection("#roi-calculator")}
+            >
+              Calculate Your ROI
+            </Button>
           </div>
         </div>
       </div>
