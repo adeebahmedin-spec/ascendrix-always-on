@@ -4,32 +4,32 @@ const steps = [
   {
     icon: Settings,
     step: "01",
-    title: "Setup & Warm-Up",
-    description: "We set up new domains, configure SPF, DKIM, and DMARC records, and create multiple outreach inboxes. Each is slowly warmed up to build sender reputation and ensure strong deliverability.",
+    title: "Infrastructure & Deliverability",
+    description: "We configure dedicated domains with SPF, DKIM, and DMARC authentication, set up multiple sending inboxes, and gradually warm each one to establish strong sender reputation before any outreach begins.",
   },
   {
     icon: Users,
     step: "02",
-    title: "ICP & Lead Sourcing",
-    description: "We define your Ideal Customer Profile - industries, roles, company size, and pain points - then build and verify targeted lead lists using tools like Clay or Apollo.",
+    title: "Audience Research & List Building",
+    description: "We map out your ideal buyer profile - job titles, industries, company size, and key pain points - then source and verify high-quality lead lists using platforms like Clay and Apollo.",
   },
   {
     icon: PenTool,
     step: "03",
-    title: "Copywriting & Testing",
-    description: "We craft multiple subject lines and email variations, A/B test them, and refine based on open and reply rates to find what converts best.",
+    title: "Message Crafting & Split Testing",
+    description: "We write compelling subject lines and email variations tailored to your audience, then A/B test each element and iterate based on real open and reply data.",
   },
   {
     icon: Send,
     step: "04",
-    title: "Outreach & Sequencing",
-    description: "We launch tailored campaigns using sequences with 3-5 follow-ups. Engagement is tracked for consistent optimisation.",
+    title: "Campaign Launch & Follow-Up Sequences",
+    description: "We deploy personalised multi-step sequences with 3-5 strategic follow-ups, tracking engagement at every stage to keep conversations moving forward.",
   },
   {
     icon: TrendingUp,
     step: "05",
-    title: "Performance & Scaling",
-    description: "We monitor key metrics, analyse results, and scale what works - ensuring your campaigns consistently generate qualified leads and booked calls.",
+    title: "Analytics, Optimisation & Scale",
+    description: "We track every key metric, identify top-performing angles, and double down on what works - scaling your campaigns to consistently deliver qualified leads and booked calls.",
   },
 ];
 
@@ -39,7 +39,7 @@ export const Services = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 sm:mb-16 animate-fade-in max-w-3xl mx-auto px-2">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-            How We Fill Your Calendar With Consistent Leads
+            Our 5-Step System to Predictable Pipeline Growth
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
             A proven 5-step system that fills your calendar with consistent qualified leads.

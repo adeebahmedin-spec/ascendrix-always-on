@@ -1,56 +1,36 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { DollarSign, CalendarCheck, TrendingUp, RotateCcw } from "lucide-react";
-
-interface ROIResults {
-  monthlyRevenue: number;
-  annualRevenue: number;
-  meetingsPerMonth: number;
-  roi: number;
-}
+import { Slider } from "@/components/ui/slider";
+import { DollarSign, CalendarCheck, TrendingUp, Zap, ChevronDown, ChevronUp } from "lucide-react";
 
 export const ROICalculator = () => {
-  const [avgDealValue, setAvgDealValue] = useState<string>("");
-  const [closeRate, setCloseRate] = useState<string>("");
-  const [meetingsPerWeek, setMeetingsPerWeek] = useState<string>("2");
-  const [results, setResults] = useState<ROIResults | null>(null);
+  const [avgDealValue, setAvgDealValue] = useState(10000);
+  const [closeRate, setCloseRate] = useState(20);
+  const [meetingsPerWeek, setMeetingsPerWeek] = useState(3);
+  const [show60Day, setShow60Day] = useState(false);
 
-  const calculateROI = () => {
-    const dealValue = parseFloat(avgDealValue) || 0;
-    const rate = (parseFloat(closeRate) || 0) / 100;
-    const meetings = parseFloat(meetingsPerWeek) || 2;
+  const campaignCost = 2000;
+  const campaign60DayCost = 4000;
 
-    const meetingsPerMonth = meetings * 4;
-    const dealsPerMonth = meetingsPerMonth * rate;
-    const monthlyRevenue = dealsPerMonth * dealValue;
-    const annualRevenue = monthlyRevenue * 12;
+  // 30-day calculations
+  const meetingsPerMonth = meetingsPerWeek * 4;
+  const dealsPerMonth = meetingsPerMonth * (closeRate / 100);
+  const monthlyRevenue = dealsPerMonth * avgDealValue;
+  const monthlyROI = ((monthlyRevenue - campaignCost) / campaignCost) * 100;
 
-    const estimatedMonthlyCost = 2000;
-    const roi = ((monthlyRevenue - estimatedMonthlyCost) / estimatedMonthlyCost) * 100;
+  // 60-day calculations
+  const meetings60 = meetingsPerWeek * 8;
+  const deals60 = meetings60 * (closeRate / 100);
+  const revenue60 = deals60 * avgDealValue;
+  const roi60 = ((revenue60 - campaign60DayCost) / campaign60DayCost) * 100;
 
-    setResults({
-      monthlyRevenue,
-      annualRevenue,
-      meetingsPerMonth,
-      roi: Math.max(0, roi),
-    });
-  };
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
 
-  const resetCalculator = () => {
-    setAvgDealValue("");
-    setCloseRate("");
-    setMeetingsPerWeek("2");
-    setResults(null);
-  };
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 0,
-    }).format(value);
+  const roiColor = (roi: number) => {
+    if (roi >= 500) return "text-green-400";
+    if (roi >= 200) return "text-primary";
+    return "text-yellow-400";
   };
 
   return (
@@ -61,120 +41,165 @@ export const ROICalculator = () => {
             See What Qualified Leads Could Mean for Your Revenue
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Enter your numbers below to estimate the potential impact on your bottom line.
+            Drag the sliders to match your business and see the potential impact.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-10 animate-fade-in">
-            {!results ? (
-              <div className="space-y-6">
-                <div className="grid gap-5 sm:grid-cols-3">
-                  <div className="space-y-2">
-                    <Label htmlFor="dealValue" className="text-sm font-medium">Average Deal Value ($)</Label>
-                    <Input
-                      id="dealValue"
-                      type="number"
-                      min="1"
-                      placeholder="e.g., 25000"
-                      value={avgDealValue}
-                      onChange={(e) => setAvgDealValue(e.target.value)}
-                      className="h-12 text-base"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="closeRate" className="text-sm font-medium">Your Close Rate (%)</Label>
-                    <Input
-                      id="closeRate"
-                      type="number"
-                      min="1"
-                      max="100"
-                      placeholder="e.g., 20"
-                      value={closeRate}
-                      onChange={(e) => setCloseRate(e.target.value)}
-                      className="h-12 text-base"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="meetings" className="text-sm font-medium">Meetings Per Week</Label>
-                    <Input
-                      id="meetings"
-                      type="number"
-                      min="1"
-                      placeholder="e.g., 2"
-                      value={meetingsPerWeek}
-                      onChange={(e) => setMeetingsPerWeek(e.target.value)}
-                      className="h-12 text-base"
-                    />
-                  </div>
+            {/* Sliders */}
+            <div className="space-y-8 mb-10">
+              <div>
+                <div className="flex justify-between items-center mb-3">
+                  <label className="text-sm font-medium">Average Deal Value</label>
+                  <span className="text-lg font-bold text-primary">{formatCurrency(avgDealValue)}</span>
                 </div>
-
-                <Button
-                  onClick={calculateROI}
-                  className="w-full h-12 text-base"
-                  disabled={!avgDealValue || !closeRate}
-                >
-                  Calculate Potential Revenue
-                </Button>
+                <Slider
+                  value={[avgDealValue]}
+                  onValueChange={(v) => setAvgDealValue(v[0])}
+                  min={1000}
+                  max={100000}
+                  step={1000}
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>£1,000</span>
+                  <span>£100,000</span>
+                </div>
               </div>
-            ) : (
-              <div className="space-y-8">
-                <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                  <div className="rounded-xl bg-primary/10 border border-primary/20 p-5 sm:p-6 text-center">
-                    <DollarSign className="mx-auto h-7 w-7 text-primary" />
-                    <p className="mt-3 text-2xl sm:text-3xl font-bold text-primary">
-                      {formatCurrency(results.monthlyRevenue)}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">Potential Monthly Revenue</p>
-                  </div>
 
-                  <div className="rounded-xl bg-primary/10 border border-primary/20 p-5 sm:p-6 text-center">
-                    <TrendingUp className="mx-auto h-7 w-7 text-primary" />
-                    <p className="mt-3 text-2xl sm:text-3xl font-bold text-primary">
-                      {formatCurrency(results.annualRevenue)}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">Potential Annual Revenue</p>
-                  </div>
-
-                  <div className="rounded-xl bg-secondary border border-border/50 p-5 sm:p-6 text-center">
-                    <CalendarCheck className="mx-auto h-7 w-7 text-foreground" />
-                    <p className="mt-3 text-2xl sm:text-3xl font-bold">
-                      {Math.round(results.meetingsPerMonth)}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">Meetings Per Month</p>
-                  </div>
-
-                  <div className="rounded-xl bg-secondary border border-border/50 p-5 sm:p-6 text-center">
-                    <TrendingUp className="mx-auto h-7 w-7 text-foreground" />
-                    <p className="mt-3 text-2xl sm:text-3xl font-bold">
-                      {Math.round(results.roi)}%
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">Estimated ROI</p>
-                  </div>
+              <div>
+                <div className="flex justify-between items-center mb-3">
+                  <label className="text-sm font-medium">Your Close Rate</label>
+                  <span className="text-lg font-bold text-primary">{closeRate}%</span>
                 </div>
+                <Slider
+                  value={[closeRate]}
+                  onValueChange={(v) => setCloseRate(v[0])}
+                  min={5}
+                  max={60}
+                  step={1}
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>5%</span>
+                  <span>60%</span>
+                </div>
+              </div>
 
-                <p className="text-center text-sm text-muted-foreground">
-                  These estimates are based on the numbers you provided. Actual results depend on your market, offer, and sales process.
-                </p>
+              <div>
+                <div className="flex justify-between items-center mb-3">
+                  <label className="text-sm font-medium">Meetings Booked Per Week</label>
+                  <span className="text-lg font-bold text-primary">{meetingsPerWeek}</span>
+                </div>
+                <Slider
+                  value={[meetingsPerWeek]}
+                  onValueChange={(v) => setMeetingsPerWeek(v[0])}
+                  min={1}
+                  max={10}
+                  step={1}
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>1/week</span>
+                  <span>10/week</span>
+                </div>
+              </div>
+            </div>
 
-                <div className="flex gap-3">
-                  <Button variant="outline" onClick={resetCalculator} className="flex-1 h-12 gap-2">
-                    <RotateCcw className="h-4 w-4" />
-                    Recalculate
-                  </Button>
-                  <Button
-                    className="flex-1 h-12"
-                    onClick={() => {
-                      document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                  >
-                    Book a Free Demo
-                  </Button>
+            {/* 30-Day Results */}
+            <div className="rounded-xl bg-primary/5 border border-primary/20 p-6 sm:p-8 mb-4">
+              <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
+                30-Day Projected Results · Campaign Cost: {formatCurrency(campaignCost)}/mo
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
+                  <p className="text-2xl sm:text-3xl font-bold">{meetingsPerMonth}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Meetings</p>
+                </div>
+                <div className="text-center">
+                  <Zap className="mx-auto h-6 w-6 text-primary mb-2" />
+                  <p className="text-2xl sm:text-3xl font-bold">{dealsPerMonth.toFixed(1)}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Est. Deals Closed</p>
+                </div>
+                <div className="text-center">
+                  <DollarSign className="mx-auto h-6 w-6 text-primary mb-2" />
+                  <p className="text-2xl sm:text-3xl font-bold">{formatCurrency(monthlyRevenue)}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
+                </div>
+                <div className="text-center">
+                  <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
+                  <p className={`text-2xl sm:text-3xl font-bold ${roiColor(monthlyROI)}`}>
+                    {Math.max(0, Math.round(monthlyROI))}%
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">ROI</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 60-Day Toggle */}
+            <button
+              onClick={() => setShow60Day(!show60Day)}
+              className="w-full rounded-xl border border-primary/30 bg-primary/10 hover:bg-primary/15 transition-colors p-4 flex items-center justify-between cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-sm">60-Day Results</p>
+                  <p className="text-xs text-muted-foreground">Campaign cost: {formatCurrency(campaign60DayCost)} · Click to {show60Day ? "hide" : "reveal"}</p>
+                </div>
+              </div>
+              {show60Day ? (
+                <ChevronUp className="h-5 w-5 text-primary" />
+              ) : (
+                <ChevronDown className="h-5 w-5 text-primary" />
+              )}
+            </button>
+
+            {show60Day && (
+              <div className="rounded-xl bg-primary/5 border border-primary/20 p-6 sm:p-8 mt-4 animate-fade-in">
+                <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
+                  60-Day Projected Results · Campaign Cost: {formatCurrency(campaign60DayCost)}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="text-center">
+                    <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
+                    <p className="text-2xl sm:text-3xl font-bold">{meetings60}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Meetings</p>
+                  </div>
+                  <div className="text-center">
+                    <Zap className="mx-auto h-6 w-6 text-primary mb-2" />
+                    <p className="text-2xl sm:text-3xl font-bold">{deals60.toFixed(1)}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Est. Deals Closed</p>
+                  </div>
+                  <div className="text-center">
+                    <DollarSign className="mx-auto h-6 w-6 text-primary mb-2" />
+                    <p className="text-2xl sm:text-3xl font-bold">{formatCurrency(revenue60)}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
+                  </div>
+                  <div className="text-center">
+                    <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
+                    <p className={`text-2xl sm:text-3xl font-bold ${roiColor(roi60)}`}>
+                      {Math.max(0, Math.round(roi60))}%
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">ROI</p>
+                  </div>
                 </div>
               </div>
             )}
+
+            <p className="text-center text-xs text-muted-foreground mt-6">
+              These projections are estimates based on the numbers you provide. Actual results depend on your market, offer, and sales process.
+            </p>
+
+            <Button
+              className="w-full h-12 text-base mt-6"
+              onClick={() => {
+                document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Book a Free Demo
+            </Button>
           </div>
         </div>
       </div>
