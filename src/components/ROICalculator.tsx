@@ -1,248 +1,203 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { DollarSign, CalendarCheck, TrendingUp, Zap, ChevronDown, ChevronUp, Users, Target, BarChart3 } from "lucide-react";
+import { Mail, Linkedin, DollarSign, Users, MessageSquare, Target, TrendingUp } from "lucide-react";
+
+const formatCurrency = (value: number) =>
+  new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
+
+const StatCard = ({ icon: Icon, value, label }: { icon: any; value: string; label: string }) => (
+  <div className="text-center p-4 rounded-xl bg-background/40 border border-border/30">
+    <Icon className="mx-auto h-5 w-5 text-primary mb-2" />
+    <p className="text-xl sm:text-2xl font-bold">{value}</p>
+    <p className="text-xs text-muted-foreground mt-1">{label}</p>
+  </div>
+);
 
 export const ROICalculator = () => {
-  const [avgDealValue, setAvgDealValue] = useState(10000);
-  const [closeRate, setCloseRate] = useState(20);
-  const [meetingsPerWeek, setMeetingsPerWeek] = useState(3);
-  const [show60Day, setShow60Day] = useState(false);
+  const [coldClientValue, setColdClientValue] = useState(2000);
+  const [linkedinClientValue, setLinkedinClientValue] = useState(2000);
 
-  const campaignCost = 2000;
-  const campaign60DayCost = 4000;
+  // Cold Email - fixed benchmarks
+  const coldMonthlyEmails = 25000;
+  const coldReplyRate = 2.5;
+  const coldCloseRate = 5;
+  const coldReplies = Math.round(coldMonthlyEmails * (coldReplyRate / 100));
+  const coldLeads = Math.round(coldReplies * (coldCloseRate / 100));
+  const coldRevenue = coldLeads * coldClientValue;
 
-  // 30-day calculations
-  const meetingsPerMonth = meetingsPerWeek * 4;
-  const dealsPerMonth = meetingsPerMonth * (closeRate / 100);
-  const monthlyRevenue = dealsPerMonth * avgDealValue;
-  const monthlyROI = ((monthlyRevenue - campaignCost) / campaignCost) * 100;
-  const monthlyProfit = monthlyRevenue - campaignCost;
-
-  // 60-day calculations
-  const meetings60 = meetingsPerWeek * 8;
-  const deals60 = meetings60 * (closeRate / 100);
-  const revenue60 = deals60 * avgDealValue;
-  const roi60 = ((revenue60 - campaign60DayCost) / campaign60DayCost) * 100;
-  const profit60 = revenue60 - campaign60DayCost;
-
-  const formatCurrency = (value: number) =>
-    new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
-
-  const roiColor = (roi: number) => {
-    if (roi >= 500) return "text-green-400";
-    if (roi >= 200) return "text-primary";
-    return "text-yellow-400";
-  };
-
-  const profitColor = (profit: number) => {
-    if (profit > 0) return "text-green-400";
-    return "text-red-400";
-  };
+  // LinkedIn - fixed benchmarks
+  const linkedinMonthlyRequests = 800;
+  const linkedinAcceptRate = 30;
+  const linkedinReplyRate = 15;
+  const linkedinCloseRate = 5;
+  const linkedinAccepts = Math.round(linkedinMonthlyRequests * (linkedinAcceptRate / 100));
+  const linkedinReplies = Math.round(linkedinAccepts * (linkedinReplyRate / 100));
+  const linkedinLeads = Math.round(linkedinReplies * (linkedinCloseRate / 100));
+  const linkedinRevenue = linkedinLeads * linkedinClientValue;
 
   return (
     <section id="roi-calculator" className="py-16 sm:py-24 lg:py-32">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10 sm:mb-14 animate-fade-in max-w-3xl mx-auto px-2">
+        <div className="text-center mb-10 sm:mb-14 animate-fade-in max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-            See What Qualified Leads Could Mean for Your Revenue
+            See What Our Campaigns Could Generate for You
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Adjust the sliders to match your business and see the potential impact of working with us.
+            Adjust your average client value and see realistic projections based on industry benchmarks.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-10 animate-fade-in">
-            {/* Sliders */}
-            <div className="space-y-10 mb-10">
-              {/* Average Deal Value */}
-              <div>
-                <div className="flex justify-between items-center mb-1">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="h-4 w-4 text-primary" />
-                    <label className="text-sm font-medium">Average Deal Value</label>
-                  </div>
-                  <span className="text-lg font-bold text-primary">{formatCurrency(avgDealValue)}</span>
-                </div>
-                <p className="text-xs text-muted-foreground mb-3">
-                  (How much revenue does a single closed deal bring in?)
-                </p>
-                <Slider
-                  value={[avgDealValue]}
-                  onValueChange={(v) => setAvgDealValue(v[0])}
-                  min={1000}
-                  max={100000}
-                  step={1000}
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>£1,000</span>
-                  <span>£100,000</span>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {/* Cold Email Section */}
+          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-8 animate-fade-in">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Mail className="h-5 w-5 text-primary" />
               </div>
-
-              {/* Close Rate */}
               <div>
-                <div className="flex justify-between items-center mb-1">
-                  <div className="flex items-center gap-2">
-                    <Target className="h-4 w-4 text-primary" />
-                    <label className="text-sm font-medium">Your Close Rate</label>
-                  </div>
-                  <span className="text-lg font-bold text-primary">{closeRate}%</span>
-                </div>
-                <p className="text-xs text-muted-foreground mb-3">
-                  (What percentage of meetings turn into paying clients?)
-                </p>
-                <Slider
-                  value={[closeRate]}
-                  onValueChange={(v) => setCloseRate(v[0])}
-                  min={5}
-                  max={60}
-                  step={1}
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>5%</span>
-                  <span>60%</span>
-                </div>
-              </div>
-
-              {/* Meetings Per Week */}
-              <div>
-                <div className="flex justify-between items-center mb-1">
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-primary" />
-                    <label className="text-sm font-medium">Meetings Booked Per Week</label>
-                  </div>
-                  <span className="text-lg font-bold text-primary">{meetingsPerWeek}</span>
-                </div>
-                <p className="text-xs text-muted-foreground mb-3">
-                  (How many qualified meetings do you want on your calendar each week?)
-                </p>
-                <Slider
-                  value={[meetingsPerWeek]}
-                  onValueChange={(v) => setMeetingsPerWeek(v[0])}
-                  min={1}
-                  max={10}
-                  step={1}
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>1/week</span>
-                  <span>10/week</span>
-                </div>
+                <h3 className="text-lg font-bold">Cold Email Outreach</h3>
+                <p className="text-xs text-muted-foreground">Monthly projection based on 25,000 emails</p>
               </div>
             </div>
 
-            {/* 30-Day Results */}
-            <div className="rounded-xl bg-primary/5 border border-primary/20 p-6 sm:p-8 mb-4">
-              <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
-                30-Day Projected Results · Campaign Cost: {formatCurrency(campaignCost)}/mo
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-                <div className="text-center">
-                  <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
-                  <p className="text-2xl sm:text-3xl font-bold">{meetingsPerMonth}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Meetings</p>
+            {/* Fixed Benchmarks */}
+            <div className="space-y-3 mb-6">
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <span className="text-muted-foreground">Monthly Outreach Emails</span>
+                <span className="font-semibold">25,000</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <div>
+                  <span className="text-muted-foreground">Average Reply Rate</span>
+                  <p className="text-[10px] text-muted-foreground/70">Industry benchmark for cold email</p>
                 </div>
-                <div className="text-center">
-                  <Zap className="mx-auto h-6 w-6 text-primary mb-2" />
-                  <p className="text-2xl sm:text-3xl font-bold">{dealsPerMonth.toFixed(1)}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Est. Deals Closed</p>
+                <span className="font-semibold">2.5%</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <div>
+                  <span className="text-muted-foreground">Average Close Rate</span>
+                  <p className="text-[10px] text-muted-foreground/70">Replies that convert to paying clients</p>
                 </div>
-                <div className="text-center">
-                  <DollarSign className="mx-auto h-6 w-6 text-primary mb-2" />
-                  <p className="text-2xl sm:text-3xl font-bold">{formatCurrency(monthlyRevenue)}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
-                </div>
-                <div className="text-center">
-                  <BarChart3 className="mx-auto h-6 w-6 text-primary mb-2" />
-                  <p className={`text-2xl sm:text-3xl font-bold ${profitColor(monthlyProfit)}`}>
-                    {formatCurrency(monthlyProfit)}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">Net Profit</p>
-                </div>
-                <div className="text-center col-span-2 sm:col-span-1">
-                  <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
-                  <p className={`text-2xl sm:text-3xl font-bold ${roiColor(monthlyROI)}`}>
-                    {Math.max(0, Math.round(monthlyROI))}%
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">ROI</p>
-                </div>
+                <span className="font-semibold">5%</span>
               </div>
             </div>
 
-            {/* 60-Day Toggle */}
-            <button
-              onClick={() => setShow60Day(!show60Day)}
-              className="w-full rounded-xl border border-primary/30 bg-primary/10 hover:bg-primary/15 transition-colors p-4 flex items-center justify-between cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <TrendingUp className="h-4 w-4 text-primary" />
+            {/* Adjustable Slider */}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-1">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-primary" />
+                  <label className="text-sm font-medium">Average Client Value</label>
                 </div>
-                <div className="text-left">
-                  <p className="font-semibold text-sm">60-Day Results</p>
-                  <p className="text-xs text-muted-foreground">Campaign cost: {formatCurrency(campaign60DayCost)} · Click to {show60Day ? "hide" : "reveal"}</p>
-                </div>
+                <span className="text-lg font-bold text-primary">{formatCurrency(coldClientValue)}</span>
               </div>
-              {show60Day ? (
-                <ChevronUp className="h-5 w-5 text-primary" />
-              ) : (
-                <ChevronDown className="h-5 w-5 text-primary" />
-              )}
-            </button>
-
-            {show60Day && (
-              <div className="rounded-xl bg-primary/5 border border-primary/20 p-6 sm:p-8 mt-4 animate-fade-in">
-                <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
-                  60-Day Projected Results · Campaign Cost: {formatCurrency(campaign60DayCost)}
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-                  <div className="text-center">
-                    <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
-                    <p className="text-2xl sm:text-3xl font-bold">{meetings60}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Meetings</p>
-                  </div>
-                  <div className="text-center">
-                    <Zap className="mx-auto h-6 w-6 text-primary mb-2" />
-                    <p className="text-2xl sm:text-3xl font-bold">{deals60.toFixed(1)}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Est. Deals Closed</p>
-                  </div>
-                  <div className="text-center">
-                    <DollarSign className="mx-auto h-6 w-6 text-primary mb-2" />
-                    <p className="text-2xl sm:text-3xl font-bold">{formatCurrency(revenue60)}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
-                  </div>
-                  <div className="text-center">
-                    <BarChart3 className="mx-auto h-6 w-6 text-primary mb-2" />
-                    <p className={`text-2xl sm:text-3xl font-bold ${profitColor(profit60)}`}>
-                      {formatCurrency(profit60)}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Net Profit</p>
-                  </div>
-                  <div className="text-center col-span-2 sm:col-span-1">
-                    <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
-                    <p className={`text-2xl sm:text-3xl font-bold ${roiColor(roi60)}`}>
-                      {Math.max(0, Math.round(roi60))}%
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">ROI</p>
-                  </div>
-                </div>
+              <p className="text-xs text-muted-foreground mb-3">(The price of your product or service)</p>
+              <Slider
+                value={[coldClientValue]}
+                onValueChange={(v) => setColdClientValue(v[0])}
+                min={500}
+                max={50000}
+                step={500}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>£500</span>
+                <span>£50,000</span>
               </div>
-            )}
+            </div>
 
-            <p className="text-center text-xs text-muted-foreground mt-6">
-              These projections are estimates based on the numbers you provide. Actual results depend on your market, offer, and sales process.
-            </p>
-
-            <Button
-              className="w-full h-12 text-base mt-6"
-              onClick={() => {
-                document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Book a Free Demo
-            </Button>
+            {/* Results */}
+            <div className="grid grid-cols-3 gap-3">
+              <StatCard icon={MessageSquare} value={coldReplies.toLocaleString()} label="Estimated Replies" />
+              <StatCard icon={Target} value={coldLeads.toLocaleString()} label="Leads Generated" />
+              <StatCard icon={TrendingUp} value={formatCurrency(coldRevenue)} label="Potential Revenue" />
+            </div>
           </div>
+
+          {/* LinkedIn Section */}
+          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-8 animate-fade-in">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Linkedin className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">LinkedIn Outreach</h3>
+                <p className="text-xs text-muted-foreground">Monthly projection based on 800 connection requests</p>
+              </div>
+            </div>
+
+            {/* Fixed Benchmarks */}
+            <div className="space-y-3 mb-6">
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <span className="text-muted-foreground">Monthly Connection Requests</span>
+                <span className="font-semibold">800</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <div>
+                  <span className="text-muted-foreground">Accept Rate</span>
+                  <p className="text-[10px] text-muted-foreground/70">Industry benchmark for targeted outreach</p>
+                </div>
+                <span className="font-semibold">30%</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <div>
+                  <span className="text-muted-foreground">Reply Rate</span>
+                  <p className="text-[10px] text-muted-foreground/70">Accepted connections who engage</p>
+                </div>
+                <span className="font-semibold">15%</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
+                <div>
+                  <span className="text-muted-foreground">Close Rate</span>
+                  <p className="text-[10px] text-muted-foreground/70">Conversations that become clients</p>
+                </div>
+                <span className="font-semibold">5%</span>
+              </div>
+            </div>
+
+            {/* Adjustable Slider */}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-1">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-primary" />
+                  <label className="text-sm font-medium">Average Client Value</label>
+                </div>
+                <span className="text-lg font-bold text-primary">{formatCurrency(linkedinClientValue)}</span>
+              </div>
+              <p className="text-xs text-muted-foreground mb-3">(The price of your product or service)</p>
+              <Slider
+                value={[linkedinClientValue]}
+                onValueChange={(v) => setLinkedinClientValue(v[0])}
+                min={500}
+                max={50000}
+                step={500}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>£500</span>
+                <span>£50,000</span>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="grid grid-cols-3 gap-3">
+              <StatCard icon={Users} value={linkedinReplies.toLocaleString()} label="Conversations Started" />
+              <StatCard icon={Target} value={linkedinLeads.toLocaleString()} label="Leads Generated" />
+              <StatCard icon={TrendingUp} value={formatCurrency(linkedinRevenue)} label="Potential Revenue" />
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-muted-foreground mt-8 max-w-2xl mx-auto">
+          These projections are based on realistic industry benchmarks. Actual results vary depending on your market, offer, and sales process.
+        </p>
+
+        <div className="text-center mt-6">
+          <Button
+            className="h-12 px-8 text-base"
+            onClick={() => document.getElementById("discovery-call")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            Book a Free Demo
+          </Button>
         </div>
       </div>
     </section>
