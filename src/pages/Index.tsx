@@ -22,6 +22,7 @@ const Index = () => {
       <FAQ />
       <AIAddon />
       <CalendlyEmbed />
+      <InboxHealthScanner />
       <Footer />
     </div>
   );
