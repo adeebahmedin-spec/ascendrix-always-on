@@ -19,10 +19,10 @@ const Index = () => {
       <Services />
       <Benefits />
       <ROICalculator />
+      <InboxHealthScanner />
       <FAQ />
       <AIAddon />
       <CalendlyEmbed />
-      <InboxHealthScanner />
       <Footer />
     </div>
   );
