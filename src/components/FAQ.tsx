@@ -8,7 +8,7 @@ import {
 const faqs = [
   {
     question: "Who is this for?",
-    answer: "We work with real estate companies, brokerages, agents, developers, commercial real estate firms, and other B2B professionals who want a reliable flow of qualified meetings on their calendar every week."
+    answer: "We work with B2B companies, agencies, consultancies, and service providers who want a reliable flow of qualified meetings on their calendar every week."
   },
   {
     question: "How is this different from running paid ads?",

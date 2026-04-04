@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { DollarSign, CalendarCheck, TrendingUp, Zap, ChevronDown, ChevronUp } from "lucide-react";
+import { DollarSign, CalendarCheck, TrendingUp, Zap, ChevronDown, ChevronUp, Users, Target, BarChart3 } from "lucide-react";
 
 export const ROICalculator = () => {
   const [avgDealValue, setAvgDealValue] = useState(10000);
@@ -17,12 +17,14 @@ export const ROICalculator = () => {
   const dealsPerMonth = meetingsPerMonth * (closeRate / 100);
   const monthlyRevenue = dealsPerMonth * avgDealValue;
   const monthlyROI = ((monthlyRevenue - campaignCost) / campaignCost) * 100;
+  const monthlyProfit = monthlyRevenue - campaignCost;
 
   // 60-day calculations
   const meetings60 = meetingsPerWeek * 8;
   const deals60 = meetings60 * (closeRate / 100);
   const revenue60 = deals60 * avgDealValue;
   const roi60 = ((revenue60 - campaign60DayCost) / campaign60DayCost) * 100;
+  const profit60 = revenue60 - campaign60DayCost;
 
   const formatCurrency = (value: number) =>
     new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
@@ -33,6 +35,11 @@ export const ROICalculator = () => {
     return "text-yellow-400";
   };
 
+  const profitColor = (profit: number) => {
+    if (profit > 0) return "text-green-400";
+    return "text-red-400";
+  };
+
   return (
     <section id="roi-calculator" className="py-16 sm:py-24 lg:py-32">
       <div className="container mx-auto px-4">
@@ -41,19 +48,26 @@ export const ROICalculator = () => {
             See What Qualified Leads Could Mean for Your Revenue
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Drag the sliders to match your business and see the potential impact.
+            Adjust the sliders to match your business and see the potential impact of working with us.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-10 animate-fade-in">
             {/* Sliders */}
-            <div className="space-y-8 mb-10">
+            <div className="space-y-10 mb-10">
+              {/* Average Deal Value */}
               <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium">Average Deal Value</label>
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="h-4 w-4 text-primary" />
+                    <label className="text-sm font-medium">Average Deal Value</label>
+                  </div>
                   <span className="text-lg font-bold text-primary">{formatCurrency(avgDealValue)}</span>
                 </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  (How much revenue does a single closed deal bring in?)
+                </p>
                 <Slider
                   value={[avgDealValue]}
                   onValueChange={(v) => setAvgDealValue(v[0])}
@@ -67,11 +81,18 @@ export const ROICalculator = () => {
                 </div>
               </div>
 
+              {/* Close Rate */}
               <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium">Your Close Rate</label>
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex items-center gap-2">
+                    <Target className="h-4 w-4 text-primary" />
+                    <label className="text-sm font-medium">Your Close Rate</label>
+                  </div>
                   <span className="text-lg font-bold text-primary">{closeRate}%</span>
                 </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  (What percentage of meetings turn into paying clients?)
+                </p>
                 <Slider
                   value={[closeRate]}
                   onValueChange={(v) => setCloseRate(v[0])}
@@ -85,11 +106,18 @@ export const ROICalculator = () => {
                 </div>
               </div>
 
+              {/* Meetings Per Week */}
               <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium">Meetings Booked Per Week</label>
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    <label className="text-sm font-medium">Meetings Booked Per Week</label>
+                  </div>
                   <span className="text-lg font-bold text-primary">{meetingsPerWeek}</span>
                 </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  (How many qualified meetings do you want on your calendar each week?)
+                </p>
                 <Slider
                   value={[meetingsPerWeek]}
                   onValueChange={(v) => setMeetingsPerWeek(v[0])}
@@ -109,7 +137,7 @@ export const ROICalculator = () => {
               <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
                 30-Day Projected Results · Campaign Cost: {formatCurrency(campaignCost)}/mo
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                 <div className="text-center">
                   <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
                   <p className="text-2xl sm:text-3xl font-bold">{meetingsPerMonth}</p>
@@ -126,6 +154,13 @@ export const ROICalculator = () => {
                   <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
                 </div>
                 <div className="text-center">
+                  <BarChart3 className="mx-auto h-6 w-6 text-primary mb-2" />
+                  <p className={`text-2xl sm:text-3xl font-bold ${profitColor(monthlyProfit)}`}>
+                    {formatCurrency(monthlyProfit)}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">Net Profit</p>
+                </div>
+                <div className="text-center col-span-2 sm:col-span-1">
                   <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
                   <p className={`text-2xl sm:text-3xl font-bold ${roiColor(monthlyROI)}`}>
                     {Math.max(0, Math.round(monthlyROI))}%
@@ -161,7 +196,7 @@ export const ROICalculator = () => {
                 <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-primary mb-6">
                   60-Day Projected Results · Campaign Cost: {formatCurrency(campaign60DayCost)}
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                   <div className="text-center">
                     <CalendarCheck className="mx-auto h-6 w-6 text-primary mb-2" />
                     <p className="text-2xl sm:text-3xl font-bold">{meetings60}</p>
@@ -178,6 +213,13 @@ export const ROICalculator = () => {
                     <p className="text-xs text-muted-foreground mt-1">Potential Revenue</p>
                   </div>
                   <div className="text-center">
+                    <BarChart3 className="mx-auto h-6 w-6 text-primary mb-2" />
+                    <p className={`text-2xl sm:text-3xl font-bold ${profitColor(profit60)}`}>
+                      {formatCurrency(profit60)}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Net Profit</p>
+                  </div>
+                  <div className="text-center col-span-2 sm:col-span-1">
                     <TrendingUp className="mx-auto h-6 w-6 text-primary mb-2" />
                     <p className={`text-2xl sm:text-3xl font-bold ${roiColor(roi60)}`}>
                       {Math.max(0, Math.round(roi60))}%
