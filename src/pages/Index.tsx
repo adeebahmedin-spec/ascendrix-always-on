@@ -7,6 +7,7 @@ import { ROICalculator } from "@/components/ROICalculator";
 import { FAQ } from "@/components/FAQ";
 import { AIAddon } from "@/components/AIAddon";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
+import { InboxHealthScanner } from "@/components/InboxHealthScanner";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <FAQ />
       <AIAddon />
       <CalendlyEmbed />
+      <InboxHealthScanner />
       <Footer />
     </div>
   );

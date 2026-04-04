@@ -7,36 +7,36 @@ import {
 
 const faqs = [
   {
-    question: "Who is this service for?",
-    answer: "We work with Real estate companies such as brokerages/agents, developers, commercial real estate firms, and many other real estate professionals who want a consistent flow of qualified meetings."
+    question: "Who is this for?",
+    answer: "We work with real estate companies, brokerages, agents, developers, commercial real estate firms, and other B2B professionals who want a reliable flow of qualified meetings on their calendar every week."
   },
   {
-    question: "How is this different from running ads?",
-    answer: "Ads require ongoing spend and often attract unqualified leads. Our approach uses direct, personalised outreach to specific decision-makers so every conversation is with someone who fits your ideal client profile."
+    question: "How is this different from running paid ads?",
+    answer: "Ads need constant spend and often attract people who aren't ready to buy. We go directly to decision-makers through personalised outreach, so every conversation is with someone who actually fits your ideal client profile."
   },
   {
-    question: "How quickly will I start seeing meetings?",
-    answer: "Most clients start seeing their first qualified meetings within 2-3 weeks of campaign launch. Results build over time as we refine targeting and messaging based on real data."
+    question: "How soon will I see results?",
+    answer: "Most clients start seeing their first qualified meetings within 2-3 weeks of campaign launch. From there, results build as we optimise targeting and messaging based on real data."
   },
   {
     question: "Do I need to provide the prospect lists?",
-    answer: "No. We handle everything from identifying your ideal prospects and building targeted lists to crafting the messaging and managing the outreach. You just show up to the meetings."
+    answer: "No. We handle everything from defining your ideal customer profile and building verified lead lists to writing the outreach copy and managing the campaigns. You just show up to the meetings."
   },
   {
-    question: "Will this make my company look spammy?",
-    answer: "Not at all. Every message is personalised and relevant to the recipient. We focus on starting genuine conversations, not blasting generic templates. Our approach is designed to build your reputation, not harm it."
+    question: "Will this come across as spammy?",
+    answer: "Not at all. Every message is personalised and relevant to the recipient. We focus on starting genuine conversations, not blasting generic templates. Our approach is designed to build your reputation, not damage it."
   },
   {
-    question: "What if the leads aren't qualified?",
-    answer: "We qualify every response before it reaches you. We filter based on budget, intent, and timeline so you're only meeting with prospects who are genuinely interested and ready to have a serious conversation."
+    question: "What if the leads aren't a good fit?",
+    answer: "We qualify every response before it reaches you. We filter based on intent, budget, and timeline so you're only meeting with prospects who are genuinely interested and ready to have a real conversation."
   },
   {
-    question: "Is there a long-term contract?",
-    answer: "We offer flexible monthly plans. We're confident you'll see the value, so we don't lock you into long commitments."
+    question: "What platforms do you use for outreach?",
+    answer: "We use a combination of cold email and LinkedIn outreach. Each campaign is built on dedicated domains with proper authentication (SPF, DKIM, DMARC) to ensure strong deliverability."
   },
   {
     question: "How much does it cost?",
-    answer: "Pricing depends on your target market and campaign scope. Book a free strategy call and we'll give you a clear breakdown based on your goals."
+    answer: "Our campaigns start from £2,000 per month. Book a free demo and we'll give you a clear breakdown based on your goals and target market."
   }
 ];
 
@@ -49,7 +49,7 @@ export const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Everything you need to know about our lead generation service
+            Common questions about how our outreach campaigns work
           </p>
         </div>
 
