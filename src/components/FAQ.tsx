@@ -7,10 +7,6 @@ import {
 
 const faqs = [
   {
-    question: "Who is this for?",
-    answer: "We work with B2B companies, agencies, consultancies, and service providers who want a reliable flow of qualified meetings on their calendar every week."
-  },
-  {
     question: "How is this different from running paid ads?",
     answer: "Ads need constant spend and often attract people who aren't ready to buy. We go directly to decision-makers through personalised outreach, so every conversation is with someone who actually fits your ideal client profile."
   },
