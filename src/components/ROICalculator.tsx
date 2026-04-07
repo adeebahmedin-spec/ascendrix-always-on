@@ -1,22 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Mail, Linkedin, DollarSign, Users, MessageSquare, Target, TrendingUp } from "lucide-react";
+import { Mail, Linkedin, DollarSign, MessageSquare, Target, TrendingUp, Users } from "lucide-react";
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 }).format(value);
 
-const StatCard = ({ icon: Icon, value, label }: { icon: any; value: string; label: string }) => (
-  <div className="text-center p-4 rounded-xl bg-background/40 border border-border/30">
-    <Icon className="mx-auto h-5 w-5 text-primary mb-2" />
-    <p className="text-xl sm:text-2xl font-bold">{value}</p>
-    <p className="text-xs text-muted-foreground mt-1">{label}</p>
-  </div>
-);
-
 export const ROICalculator = () => {
-  const [coldClientValue, setColdClientValue] = useState(2000);
-  const [linkedinClientValue, setLinkedinClientValue] = useState(2000);
+  const [clientValue, setClientValue] = useState(2000);
 
   // Cold Email - fixed benchmarks
   const coldMonthlyEmails = 25000;
@@ -24,7 +15,7 @@ export const ROICalculator = () => {
   const coldCloseRate = 5;
   const coldReplies = Math.round(coldMonthlyEmails * (coldReplyRate / 100));
   const coldLeads = Math.round(coldReplies * (coldCloseRate / 100));
-  const coldRevenue = coldLeads * coldClientValue;
+  const coldRevenue = coldLeads * clientValue;
 
   // LinkedIn - fixed benchmarks
   const linkedinMonthlyRequests = 800;
@@ -34,7 +25,11 @@ export const ROICalculator = () => {
   const linkedinAccepts = Math.round(linkedinMonthlyRequests * (linkedinAcceptRate / 100));
   const linkedinReplies = Math.round(linkedinAccepts * (linkedinReplyRate / 100));
   const linkedinLeads = Math.round(linkedinReplies * (linkedinCloseRate / 100));
-  const linkedinRevenue = linkedinLeads * linkedinClientValue;
+  const linkedinRevenue = linkedinLeads * clientValue;
+
+  const totalLeads = coldLeads + linkedinLeads;
+  const totalRevenue = coldRevenue + linkedinRevenue;
+  const totalReplies = coldReplies + linkedinReplies;
 
   return (
     <section id="roi-calculator" className="py-16 sm:py-24 lg:py-32">
@@ -44,145 +39,139 @@ export const ROICalculator = () => {
             See What Our Campaigns Could Generate for You
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Adjust your average client value and see realistic projections based on industry benchmarks.
+            Adjust your average client value and see realistic projections based on industry benchmarks across both channels.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {/* Cold Email Section */}
-          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-8 animate-fade-in">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Mail className="h-5 w-5 text-primary" />
+        <div className="max-w-4xl mx-auto rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-10 animate-fade-in">
+          {/* Slider */}
+          <div className="mb-10 max-w-xl mx-auto">
+            <div className="flex justify-between items-center mb-1">
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-primary" />
+                <label className="text-sm sm:text-base font-semibold">Average Client Value</label>
               </div>
-              <div>
-                <h3 className="text-lg font-bold">Cold Email Outreach</h3>
-                <p className="text-xs text-muted-foreground">Monthly projection based on 25,000 emails</p>
-              </div>
+              <span className="text-xl sm:text-2xl font-bold text-primary">{formatCurrency(clientValue)}</span>
             </div>
-
-            {/* Fixed Benchmarks */}
-            <div className="space-y-3 mb-6">
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <span className="text-muted-foreground">Monthly Outreach Emails</span>
-                <span className="font-semibold">25,000</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <div>
-                  <span className="text-muted-foreground">Average Reply Rate</span>
-                  <p className="text-[10px] text-muted-foreground/70">Industry benchmark for cold email</p>
-                </div>
-                <span className="font-semibold">2.5%</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <div>
-                  <span className="text-muted-foreground">Average Close Rate</span>
-                  <p className="text-[10px] text-muted-foreground/70">Replies that convert to paying clients</p>
-                </div>
-                <span className="font-semibold">5%</span>
-              </div>
-            </div>
-
-            {/* Adjustable Slider */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-1">
-                <div className="flex items-center gap-2">
-                  <DollarSign className="h-4 w-4 text-primary" />
-                  <label className="text-sm font-medium">Average Client Value</label>
-                </div>
-                <span className="text-lg font-bold text-primary">{formatCurrency(coldClientValue)}</span>
-              </div>
-              <p className="text-xs text-muted-foreground mb-3">(The price of your product or service)</p>
-              <Slider
-                value={[coldClientValue]}
-                onValueChange={(v) => setColdClientValue(v[0])}
-                min={500}
-                max={50000}
-                step={500}
-              />
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                <span>£500</span>
-                <span>£50,000</span>
-              </div>
-            </div>
-
-            {/* Results */}
-            <div className="grid grid-cols-3 gap-3">
-              <StatCard icon={MessageSquare} value={coldReplies.toLocaleString()} label="Estimated Replies" />
-              <StatCard icon={Target} value={coldLeads.toLocaleString()} label="Leads Generated" />
-              <StatCard icon={TrendingUp} value={formatCurrency(coldRevenue)} label="Potential Revenue" />
+            <p className="text-xs text-muted-foreground mb-4">(The price of your product or service)</p>
+            <Slider
+              value={[clientValue]}
+              onValueChange={(v) => setClientValue(v[0])}
+              min={500}
+              max={50000}
+              step={500}
+            />
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <span>£500</span>
+              <span>£50,000</span>
             </div>
           </div>
 
-          {/* LinkedIn Section */}
-          <div className="rounded-2xl bg-background/60 border border-border/50 p-6 sm:p-8 animate-fade-in">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Linkedin className="h-5 w-5 text-primary" />
+          {/* Channel Breakdown */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            {/* Cold Email */}
+            <div className="rounded-xl border border-border/40 bg-muted/20 p-5 sm:p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Mail className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="font-bold">Cold Email</h3>
+              </div>
+              <div className="space-y-2 text-sm mb-5">
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Monthly Emails Sent</span>
+                  <span className="font-semibold">25,000</span>
+                </div>
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Reply Rate</span>
+                  <span className="font-semibold">2.5%</span>
+                </div>
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Close Rate</span>
+                  <span className="font-semibold">5%</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <MessageSquare className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{coldReplies}</p>
+                  <p className="text-[10px] text-muted-foreground">Replies</p>
+                </div>
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <Target className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{coldLeads}</p>
+                  <p className="text-[10px] text-muted-foreground">Leads</p>
+                </div>
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <TrendingUp className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{formatCurrency(coldRevenue)}</p>
+                  <p className="text-[10px] text-muted-foreground">Revenue</p>
+                </div>
+              </div>
+            </div>
+
+            {/* LinkedIn */}
+            <div className="rounded-xl border border-border/40 bg-muted/20 p-5 sm:p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Linkedin className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="font-bold">LinkedIn Outreach</h3>
+              </div>
+              <div className="space-y-2 text-sm mb-5">
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Monthly Requests</span>
+                  <span className="font-semibold">800</span>
+                </div>
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Accept Rate</span>
+                  <span className="font-semibold">30%</span>
+                </div>
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Reply Rate</span>
+                  <span className="font-semibold">15%</span>
+                </div>
+                <div className="flex justify-between p-2.5 rounded-lg bg-background/50">
+                  <span className="text-muted-foreground">Close Rate</span>
+                  <span className="font-semibold">5%</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <Users className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{linkedinReplies}</p>
+                  <p className="text-[10px] text-muted-foreground">Conversations</p>
+                </div>
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <Target className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{linkedinLeads}</p>
+                  <p className="text-[10px] text-muted-foreground">Leads</p>
+                </div>
+                <div className="p-3 rounded-lg bg-background/40 border border-border/30">
+                  <TrendingUp className="mx-auto h-4 w-4 text-primary mb-1" />
+                  <p className="text-lg font-bold">{formatCurrency(linkedinRevenue)}</p>
+                  <p className="text-[10px] text-muted-foreground">Revenue</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Combined Total */}
+          <div className="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
+            <p className="text-sm text-muted-foreground mb-3 font-medium">Combined Monthly Projection</p>
+            <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-primary">{totalReplies}</p>
+                <p className="text-xs text-muted-foreground mt-1">Total Responses</p>
               </div>
               <div>
-                <h3 className="text-lg font-bold">LinkedIn Outreach</h3>
-                <p className="text-xs text-muted-foreground">Monthly projection based on 800 connection requests</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary">{totalLeads}</p>
+                <p className="text-xs text-muted-foreground mt-1">Total Leads</p>
               </div>
-            </div>
-
-            {/* Fixed Benchmarks */}
-            <div className="space-y-3 mb-6">
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <span className="text-muted-foreground">Monthly Connection Requests</span>
-                <span className="font-semibold">800</span>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-primary">{formatCurrency(totalRevenue)}</p>
+                <p className="text-xs text-muted-foreground mt-1">Total Revenue</p>
               </div>
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <div>
-                  <span className="text-muted-foreground">Accept Rate</span>
-                  <p className="text-[10px] text-muted-foreground/70">Industry benchmark for targeted outreach</p>
-                </div>
-                <span className="font-semibold">30%</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <div>
-                  <span className="text-muted-foreground">Reply Rate</span>
-                  <p className="text-[10px] text-muted-foreground/70">Accepted connections who engage</p>
-                </div>
-                <span className="font-semibold">15%</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/30">
-                <div>
-                  <span className="text-muted-foreground">Close Rate</span>
-                  <p className="text-[10px] text-muted-foreground/70">Conversations that become clients</p>
-                </div>
-                <span className="font-semibold">5%</span>
-              </div>
-            </div>
-
-            {/* Adjustable Slider */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-1">
-                <div className="flex items-center gap-2">
-                  <DollarSign className="h-4 w-4 text-primary" />
-                  <label className="text-sm font-medium">Average Client Value</label>
-                </div>
-                <span className="text-lg font-bold text-primary">{formatCurrency(linkedinClientValue)}</span>
-              </div>
-              <p className="text-xs text-muted-foreground mb-3">(The price of your product or service)</p>
-              <Slider
-                value={[linkedinClientValue]}
-                onValueChange={(v) => setLinkedinClientValue(v[0])}
-                min={500}
-                max={50000}
-                step={500}
-              />
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                <span>£500</span>
-                <span>£50,000</span>
-              </div>
-            </div>
-
-            {/* Results */}
-            <div className="grid grid-cols-3 gap-3">
-              <StatCard icon={Users} value={linkedinReplies.toLocaleString()} label="Conversations Started" />
-              <StatCard icon={Target} value={linkedinLeads.toLocaleString()} label="Leads Generated" />
-              <StatCard icon={TrendingUp} value={formatCurrency(linkedinRevenue)} label="Potential Revenue" />
             </div>
           </div>
         </div>
