@@ -84,6 +84,10 @@ export default {
           "0%": { transform: "scale(0.95)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" }
         },
+        "marquee": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -91,6 +95,7 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "fade-in-delay": "fade-in-delay 0.8s ease-out 0.2s both",
         "scale-in": "scale-in 0.5s ease-out",
+        "marquee": "marquee 20s linear infinite",
       },
     },
   },
