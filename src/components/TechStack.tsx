@@ -1,12 +1,17 @@
+import logoApollo from "@/assets/logo-apollo.png";
+import logoMillionVerifier from "@/assets/logo-millionverifier.png";
+import logoClay from "@/assets/logo-clay.png";
+import logoGoogleWorkspace from "@/assets/logo-google-workspace.png";
+import logoInstantly from "@/assets/logo-instantly.png";
+
 const platforms = [
-  "Apollo",
-  "MillionVerifier",
-  "Clay",
-  "Google Workspace",
-  "Instantly",
+  { name: "Apollo", logo: logoApollo },
+  { name: "MillionVerifier", logo: logoMillionVerifier },
+  { name: "Clay", logo: logoClay },
+  { name: "Google Workspace", logo: logoGoogleWorkspace },
+  { name: "Instantly", logo: logoInstantly },
 ];
 
-// Duplicate for seamless loop
 const items = [...platforms, ...platforms];
 
 export const TechStack = () => {
@@ -18,18 +23,25 @@ export const TechStack = () => {
         </p>
       </div>
       <div className="relative">
-        {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
 
         <div className="flex animate-marquee whitespace-nowrap">
-          {items.map((name, i) => (
+          {items.map((platform, i) => (
             <div
               key={i}
-              className="mx-8 sm:mx-12 flex-shrink-0 flex items-center gap-2"
+              className="mx-8 sm:mx-12 flex-shrink-0 flex items-center gap-3"
             >
+              <img
+                src={platform.logo}
+                alt={platform.name}
+                loading="lazy"
+                width={32}
+                height={32}
+                className="h-8 w-8 object-contain"
+              />
               <span className="text-base sm:text-lg font-semibold text-muted-foreground/70 select-none">
-                {name}
+                {platform.name}
               </span>
             </div>
           ))}
