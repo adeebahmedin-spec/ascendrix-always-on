@@ -30,17 +30,17 @@ export const TechStack = () => {
           {items.map((platform, i) => (
             <div
               key={i}
-              className="mx-8 sm:mx-12 flex-shrink-0 flex items-center gap-3"
+              className="mx-8 sm:mx-12 flex-shrink-0 flex flex-col items-center gap-2"
             >
               <img
                 src={platform.logo}
                 alt={platform.name}
                 loading="lazy"
-                width={32}
-                height={32}
-                className="h-8 w-8 object-contain"
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
               />
-              <span className="text-base sm:text-lg font-semibold text-muted-foreground/70 select-none">
+              <span className="text-sm sm:text-base font-semibold text-muted-foreground/70 select-none">
                 {platform.name}
               </span>
             </div>
